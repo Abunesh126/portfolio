@@ -1,0 +1,42 @@
+/* Skills Orbit Component Styles */
+
+.skills-section {
+  background-image: url('../assets/background/skilldark-bg.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+/* Light theme - disable background */
+.light .skills-section {
+  background-image: none;
+}
+
+.orbit-rotation {
+  animation: rotate 60s linear infinite;
+  will-change: transform; /* GPU acceleration */
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Respect user's motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .orbit-rotation {
+    animation: none;
+  }
+}
+
+/* Enhanced responsive design */
+@media (max-width: 768px) {
+  .skills-section {
+    background-attachment: scroll; /* Better mobile performance */
+  }
+}
