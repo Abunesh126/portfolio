@@ -18,17 +18,15 @@ const Contact: React.FC = () => {
   };
 
   return (
-    <section id="contact" className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 dark:from-gray-950 dark:via-blue-950 dark:to-indigo-950 py-16 px-4">
-      <div className="max-w-4xl w-full bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm shadow-xl rounded-xl p-8 border border-white/20 dark:border-gray-700/50">
+    <section id="contact" className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900">
+      <div className="max-w-4xl w-full bg-white dark:bg-gray-800 shadow-lg rounded-lg p-8">
         <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-6 text-center">Contact Me</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
-            <h3 className="text-xl font-semibold text-gray-800 dark:text-gray-200 mb-4">Get in Touch</h3>
-            <p className="text-gray-600 dark:text-gray-400 mb-4">Feel free to reach out to me through any of the following methods:</p>
+            <h3 className="text-xl font-semibold text-gray-800 dark:text-gray-200 mb-4 text-center">Get in Touch</h3>
             <ul className="space-y-2">
               <li>Email: <a href="mailto:abuneshfire@gmail.com" className="text-blue-600 dark:text-blue-400">abuneshfire@gmail.com</a></li>
               <li>Phone: <a href="tel:+919042845355" className="text-blue-600 dark:text-blue-400">+91 9042845355</a></li>
-              <li>LinkedIn: <a href="https://www.linkedin.com/in/abunesh-r-p-803677278/" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400">LinkedIn Profile</a></li>
             </ul>
           </div>
           <form ref={formRef} onSubmit={handleSubmit} className="space-y-4">

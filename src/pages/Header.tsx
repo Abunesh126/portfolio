@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { FiMenu, FiX, FiSun, FiMoon } from "react-icons/fi";
-import logo from "../assets/logo.png";
 
 // NPM requirements:
 // npm install react react-dom react-icons tailwindcss
@@ -46,25 +45,23 @@ const Header: React.FC = () => {
 
   return (
     <header className="fixed top-0 left-0 w-full z-50 bg-gradient-to-r from-white via-blue-100 to-white dark:from-gray-900 dark:via-blue-900 dark:to-gray-900 transition-colors duration-500 shadow-xl border-b border-white/10 backdrop-blur-sm">
-      <div className="flex items-center justify-between w-full max-w-screen-2xl mx-auto px-6 h-16">
-        {/* Left: Logo + Name */}
+      <div className="flex items-center justify-between w-full max-w-screen-2xl mx-auto px-4 h-16">
+        {/* Left: Logo */}
         <a
           href="#hero"
-          className="flex items-center space-x-3 text-2xl font-bold text-gray-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-300 focus:outline-none cursor-pointer"
+          className="text-2xl font-bold text-blue-600 dark:text-blue-400 focus:outline-none cursor-pointer"
           aria-label="Go to hero section"
-          onClick={(e: React.MouseEvent<HTMLAnchorElement>) => {
+          onClick={e => {
             e.preventDefault();
             const hero = document.getElementById("hero");
             if (hero) hero.scrollIntoView({ behavior: "smooth" });
             else window.scrollTo({ top: 0, behavior: "smooth" });
           }}
         >
-          <img src={logo} alt="Logo" className="w-10 h-10 object-contain" />
-          <span>Abunesh RP</span>
+          Abunesh RP
         </a>
-
         {/* Right: Nav and Theme Toggle */}
-        <div className="flex items-center space-x-6">
+        <div className="flex items-center space-x-2">
           <nav className="hidden md:flex items-center space-x-8">
             {navLinks.map(link => (
               <a
@@ -78,14 +75,14 @@ const Header: React.FC = () => {
           </nav>
           <button
             onClick={toggleTheme}
-            className="p-2 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600 transition-all focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="ml-2 p-2 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600 transition-all focus:outline-none focus:ring-2 focus:ring-blue-500"
             aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} theme`}
           >
             {theme === 'light' ? <FiMoon size={20} /> : <FiSun size={20} />}
           </button>
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden text-gray-700 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="md:hidden ml-2 text-gray-700 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
             aria-label={isOpen ? 'Close menu' : 'Open menu'}
           >
             {isOpen ? <FiX size={24} /> : <FiMenu size={24} />}

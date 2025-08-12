@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import profileImg from "../assets/profile.png";
-import './Skills.css';
+
 
 // ProfileCard component
 export function ProfileCard() {
@@ -134,8 +134,8 @@ const SkillOrbit: React.FC = () => {
     const updateRadius = () => {
       if (orbitRef.current) {
         const containerSize = Math.min(orbitRef.current.clientWidth, orbitRef.current.clientHeight);
-        const radius = containerSize * 0.42; // Increased from 0.35 to 0.42 for larger radius
-        const cardSize = Math.max(56, Math.min(72, containerSize * 0.09)); // Increased card size
+        const radius = containerSize * 0.35; // 35% of container size
+        const cardSize = Math.max(48, Math.min(64, containerSize * 0.08)); // Responsive card size
         
         orbitRef.current.style.setProperty('--orbit-radius', `${radius}px`);
         orbitRef.current.style.setProperty('--card-size', `${cardSize}px`);
@@ -150,7 +150,7 @@ const SkillOrbit: React.FC = () => {
   return (
     <section 
       id="skills" 
-      className="skills-section min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 dark:from-gray-950 dark:via-blue-950 dark:to-indigo-950 py-16 px-4"
+      className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 dark:from-gray-950 dark:via-blue-950 dark:to-indigo-950 py-16 px-4"
     >
       <div className="w-full max-w-6xl mx-auto">
         {/* Section Header */}
@@ -167,10 +167,10 @@ const SkillOrbit: React.FC = () => {
         {/* Skill Orbit Container */}
         <div 
           ref={orbitRef} 
-          className="relative mx-auto aspect-square w-full max-w-3xl"
+          className="relative mx-auto aspect-square w-full max-w-2xl"
           style={{
-            '--orbit-radius': '240px',
-            '--card-size': '64px'
+            '--orbit-radius': '200px',
+            '--card-size': '56px'
           } as React.CSSProperties}
         >
           {/* Central Profile */}
@@ -204,11 +204,12 @@ const SkillOrbit: React.FC = () => {
                   transform: `rotate(${angle}deg) translateY(calc(var(--orbit-radius) * -1))`,
                 }}
               >
-                {/* Connection Line - Fixed positioning inside the circle */}
+                {/* Connection Line - Rotates with spoke */}
                 <div 
-                  className="absolute bottom-full left-1/2 w-0.5 bg-gradient-to-b from-gray-300 to-transparent dark:from-gray-600 -translate-x-1/2 origin-bottom"
+                  className="absolute top-0 left-1/2 w-0.5 bg-gradient-to-t from-gray-300 to-transparent dark:from-gray-600 -translate-x-1/2 origin-top"
                   style={{ 
-                    height: 'calc(var(--orbit-radius) - var(--card-size) / 2)',
+                    height: 'var(--orbit-radius)',
+                    transform: 'translateY(-100%)'
                   }}
                 />
 
@@ -257,34 +258,44 @@ const SkillOrbit: React.FC = () => {
           />
         </div>
 
-        {/* Skills Legend - Improved category display */}
-        <div className="mt-16 max-w-6xl mx-auto">
-          <h3 className="text-2xl font-bold text-center text-gray-900 dark:text-white mb-8">
-            Skills by Category
-          </h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {Object.entries(SKILL_CATEGORIES).map(([category, skillsList]) => (
-              <div key={category} className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-xl p-6 shadow-lg border border-gray-200 dark:border-gray-700 hover:shadow-xl transition-all duration-300">
-                <h4 className="font-bold text-lg text-gray-900 dark:text-white mb-3 flex items-center gap-2">
-                  <span className="w-3 h-3 bg-blue-500 rounded-full"></span>
-                  {category.replace('_', '/')}
-                </h4>
-                <div className="space-y-2">
-                  {skillsList.map((skill) => (
-                    <div key={skill} className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-300">
-                      <div className="w-1.5 h-1.5 bg-gray-400 rounded-full"></div>
-                      {skill}
-                    </div>
-                  ))}
-                </div>
-                <div className="mt-3 text-xs text-blue-600 dark:text-blue-400 font-medium">
-                  {skillsList.length} skill{skillsList.length !== 1 ? 's' : ''}
-                </div>
+        {/* Skills Legend */}
+        <div className="mt-16 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 max-w-4xl mx-auto">
+          {Object.entries(SKILL_CATEGORIES).map(([category, skills]) => (
+            <div key={category} className="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-sm border border-gray-200 dark:border-gray-700">
+              <h4 className="font-semibold text-gray-900 dark:text-white mb-2 text-sm">
+                {category.replace('_', '/')}
+              </h4>
+              <div className="text-xs text-gray-600 dark:text-gray-300">
+                {skills.length} skill{skills.length !== 1 ? 's' : ''}
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
         </div>
       </div>
+
+      <style jsx>{`
+        .orbit-rotation {
+          animation: orbit-rotate 120s linear infinite;
+        }
+
+        @keyframes orbit-rotate {
+          0% {
+            transform: rotate(0deg);
+          }
+          from {
+            transform: rotate(0deg);
+          }
+          to {
+            transform: rotate(360deg);
+          }
+        }
+        
+        @media (prefers-reduced-motion: reduce) {
+          .orbit-rotation {
+            animation: none;
+          }
+        }
+      `}</style>
     </section>
   );
 };
