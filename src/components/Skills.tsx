@@ -1,303 +1,1108 @@
-import React, { useEffect, useRef } from 'react';
-import profileImg from "../assets/profile.png";
+import { useState, useMemo } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { 
+  ChevronDown, 
+  X, 
+  Code2, 
+  Server, 
+  Database, 
+  Palette, 
+  Wrench,
+  BrainCircuit,
+  Monitor
+} from 'lucide-react';
 
+// Import SVG icons
+import PythonIcon from '../assets/icon/python-5.svg';
+import JavaIcon from '../assets/icon/java-14.svg';
+import JavaScriptIcon from '../assets/icon/javascript-1.svg';
+import TypeScriptIcon from '../assets/icon/typescript.svg';
+import HTMLIcon from '../assets/icon/html-1.svg';
+import CSSIcon from '../assets/icon/css-3.svg';
+import ReactIcon from '../assets/icon/react-2.svg';
+import TailwindIcon from '../assets/icon/tailwind-css-2.svg';
+import BootstrapIcon from '../assets/icon/bootstrap.svg';
+import NodeIcon from '../assets/icon/nodejs-1.svg';
+import LaravelIcon from '../assets/icon/laravel-2.svg';
+import MongoDBIcon from '../assets/icon/mongodb-icon-1.svg';
+import MySQLIcon from '../assets/icon/mysql.svg';
+import PostgreSQLIcon from '../assets/icon/postgresql.svg';
+import GitIcon from '../assets/icon/git.svg';
+import GitHubIcon from '../assets/icon/github-icon-1.svg';
+import VSCodeIcon from '../assets/icon/visual-studio-code-1.svg';
+import JupyterIcon from '../assets/icon/jupyter.svg';
+import PostmanIcon from '../assets/icon/postman.svg';
+import PyCharmIcon from '../assets/icon/pycharm.svg';
+import SQLIcon from '../assets/icon/sql.svg';
+import TensorFlowIcon from '../assets/icon/tensorflow-2.svg';
+import TableauIcon from '../assets/icon/tableau-logo-1.svg';
+import BlenderIcon from '../assets/icon/blender-2.svg';
+import CanvaIcon from '../assets/icon/canva-wordmark-2.svg';
+import FigmaIcon from '../assets/icon/figma.svg';
 
-// ProfileCard component
-export function ProfileCard() {
-  return (
-    <div className="flex flex-col items-center">
-      {/* Profile Image Circle */}
-      <div className="flex h-24 w-24 md:h-32 md:w-32 items-center justify-center rounded-full bg-gradient-to-br from-blue-600 to-purple-600 p-1 shadow-lg border-4 border-white dark:border-gray-800">
-        <img
-          src={profileImg}
-          alt="Abunesh RP"
-          className="h-full w-full rounded-full object-cover"
-        />
-      </div>
-
-      {/* Name */}
-      <h3 className="mt-3 text-lg md:text-xl font-semibold text-gray-900 dark:text-white">
-        Abunesh RP
-      </h3>
-
-      {/* Role */}
-      <p className="text-sm md:text-base text-gray-600 dark:text-gray-300">
-        Software Engineer
-      </p>
-    </div>
-  );
-}
-
-/**
- * Production-ready Skill Orbit Component
- * 
- * Features:
- * - Single GPU-accelerated CSS rotation on outer container
- * - Counter-rotated skill cards to stay upright
- * - Connection lines from center to each skill
- * - Responsive design with CSS variables
- * - Full accessibility support (keyboard + screen reader)
- * - Performance optimized with minimal DOM and no JS animations
- */
-
-// Type definitions
-interface Skill {
-  id: string;
-  label: string;
-  category: string;
-  icon: string;
-  ariaLabel: string;
-  angle: number;
-}
-
-interface SkillCategory {
-  [key: string]: string[];
-}
-
-// Skills data organized by category
-const SKILL_CATEGORIES: SkillCategory = {
-  Languages: ['Python', 'Java', 'JavaScript', 'TypeScript', 'HTML5', 'CSS3'],
-  Frontend: ['React', 'TailwindCSS'],
-  Backend: ['Node.js', 'Laravel'],
-  Database: ['MongoDB'],
-  Tools: ['Git', 'GitHub', 'VS Code', 'Jupyter', 'Postman'],
-  AI_ML: ['TensorFlow', 'Tableau'],
-  Design: ['Blender', 'Canva']
+// Icon mapping for skills using imported SVG icons
+const skillIcons: Record<string, string> = {
+  // Languages
+  Python: PythonIcon,
+  Java: JavaIcon,
+  JavaScript: JavaScriptIcon,
+  TypeScript: TypeScriptIcon,
+  HTML5: HTMLIcon,
+  CSS3: CSSIcon,
+  SQL: SQLIcon,
+  
+  // Frontend
+  React: ReactIcon,
+  TailwindCSS: TailwindIcon,
+  Bootstrap: BootstrapIcon,
+  
+  // Backend
+  'Node.js': NodeIcon,
+  Laravel: LaravelIcon,
+  
+  // Database
+  MongoDB: MongoDBIcon,
+  MySQL: MySQLIcon,
+  PostgreSQL: PostgreSQLIcon,
+  
+  // Tools
+  Git: GitIcon,
+  GitHub: GitHubIcon,
+  'VS Code': VSCodeIcon,
+  Jupyter: JupyterIcon,
+  Postman: PostmanIcon,
+  PyCharm: PyCharmIcon,
+  
+  // AI & ML
+  TensorFlow: TensorFlowIcon,
+  Tableau: TableauIcon,
+  
+  // Design
+  Blender: BlenderIcon,
+  Canva: CanvaIcon,
+  Figma: FigmaIcon
 };
 
-// Helper function to get total skill count
-const getTotalSkillCount = (): number => {
-  return Object.values(SKILL_CATEGORIES).reduce((total, skills) => total + skills.length, 0);
+// Category icons
+const categoryIcons = {
+  Languages: Code2,
+  Frontend: Monitor,
+  Backend: Server,
+  Database: Database,
+  Tools: Wrench,
+  'AI & ML': BrainCircuit,
+  Design: Palette
 };
 
-// Helper function to get icon file name
-const getIconFileName = (skillName: string): string => {
-  const iconMap: { [key: string]: string } = {
-    'Python': 'python-5.svg',
-    'Java': 'java-14.svg', 
-    'JavaScript': 'javascript-1.svg',
-    'TypeScript': 'typescript.svg',
-    'HTML5': 'html-1.svg',
-    'CSS3': 'css-3.svg',
-    'React': 'react-2.svg',
-    'TailwindCSS': 'tailwind-css-2.svg',
-    'Node.js': 'nodejs-1.svg',
-    'Laravel': 'laravel-2.svg',
-    'MongoDB': 'mongodb-icon-1.svg',
-    'Git': 'git.svg',
-    'GitHub': 'github-icon-1.svg',
-    'VS Code': 'visual-studio-code-1.svg',
-    'Jupyter': 'jupyter.svg',
-    'Postman': 'postman.svg',
-    'TensorFlow': 'tensorflow-2.svg',
-    'Tableau': 'tableau-logo-1.svg',
-    'Blender': 'blender-2.svg',
-    'Canva': 'canva-wordmark-2.svg'
+// Animation variants
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      duration: 0.3,
+      staggerChildren: 0.03
+    }
+  }
+};
+
+const skillsData = {
+  title: "Technical Skills",
+  description: "Explore my technical expertise across different categories. Hover over each skill to discover what I've learned and accomplished.",
+  categories: {
+    Languages: {
+      icon: 'Languages',
+      skills: ['Python', 'Java', 'JavaScript', 'TypeScript', 'HTML5', 'CSS3', 'SQL']
+    },
+    Frontend: {
+      icon: 'Frontend',
+      skills: ['React', 'TailwindCSS', 'Bootstrap']
+    },
+    Backend: {
+      icon: 'Backend',
+      skills: ['Node.js', 'Laravel']
+    },
+    Database: {
+      icon: 'Database',
+      skills: ['MongoDB', 'MySQL', 'PostgreSQL']
+    },
+    Tools: {
+      icon: 'Tools',
+      skills: ['Git', 'GitHub', 'VS Code', 'Jupyter', 'Postman', 'PyCharm']
+    },
+    'AI & ML': {
+      icon: 'AI & ML',
+      skills: ['TensorFlow', 'Tableau']
+    },
+    Design: {
+      icon: 'Design',
+      skills: ['Blender', 'Canva', 'Figma']
+    }
+  },
+  skills: {
+    Python: {
+      description: "🐍 Master of Python development with 3+ years experience. Built web applications with Django/Flask, automated workflows, and developed machine learning models. Expertise in data analysis, scripting, and API development.",
+      achievements: ["Built 10+ web applications", "Automated complex workflows", "Developed ML models", "Created REST APIs"]
+    },
+    Java: {
+      description: "☕ Proficient in object-oriented programming with Java. Developed enterprise applications, worked with Spring Framework, and built Android applications. Strong understanding of JVM optimization and design patterns.",
+      achievements: ["Enterprise application development", "Spring Framework expertise", "Android app development", "Design pattern implementation"]
+    },
+    JavaScript: {
+      description: "⚡ Expert in modern JavaScript (ES6+) for dynamic web applications. Experience with async programming, DOM manipulation, and building interactive user interfaces. Proficient in both frontend and backend development.",
+      achievements: ["Modern ES6+ features", "Async programming", "Interactive UIs", "Full-stack development"]
+    },
+    TypeScript: {
+      description: "🎯 Advanced TypeScript developer ensuring type safety in large-scale applications. Experience with React TypeScript projects, API typing, and improving code maintainability through strong typing.",
+      achievements: ["Type-safe applications", "React TypeScript projects", "API type definitions", "Code maintainability"]
+    },
+    HTML5: {
+      description: "🗂️ Semantic HTML5 markup specialist. Create accessible, SEO-optimized web structures using modern HTML5 features like Canvas, WebGL, and progressive web app capabilities.",
+      achievements: ["Semantic markup", "Accessibility standards", "SEO optimization", "PWA development"]
+    },
+    CSS3: {
+      description: "🎨 Advanced CSS3 styling with Flexbox, Grid, animations, and responsive design. Experience with CSS-in-JS, preprocessors (Sass), and modern CSS frameworks.",
+      achievements: ["Flexbox & Grid layouts", "CSS animations", "Responsive design", "CSS preprocessors"]
+    },
+    React: {
+      description: "⚛️ React ecosystem expert with hooks, context, and state management. Built scalable SPAs, component libraries, and implemented performance optimization techniques like memoization and lazy loading.",
+      achievements: ["Scalable SPAs", "Custom hooks", "Performance optimization", "Component libraries"]
+    },
+    TailwindCSS: {
+      description: "🎨 Utility-first CSS framework specialist. Rapid prototyping and responsive design implementation. Custom design systems and component styling with Tailwind's advanced features.",
+      achievements: ["Rapid prototyping", "Custom design systems", "Responsive layouts", "Component styling"]
+    },
+    Bootstrap: {
+      description: "📱 Bootstrap framework proficiency for responsive web design. Custom theme development, component customization, and mobile-first development approaches.",
+      achievements: ["Responsive design", "Custom themes", "Component customization", "Mobile-first approach"]
+    },
+    'Node.js': {
+      description: "🟢 Node.js backend development with Express.js, REST APIs, and microservices architecture. Experience with authentication systems, database integration, and scalable server solutions.",
+      achievements: ["REST API development", "Microservices architecture", "Authentication systems", "Scalable solutions"]
+    },
+    Laravel: {
+      description: "🔴 PHP Laravel framework expert. Built MVC applications, implemented authentication systems, created RESTful APIs, and managed database relationships with Eloquent ORM.",
+      achievements: ["MVC applications", "RESTful APIs", "Eloquent ORM", "Authentication systems"]
+    },
+    MongoDB: {
+      description: "🍃 NoSQL database specialist with MongoDB. Schema design for document databases, aggregation pipelines, indexing strategies, and integration with Node.js applications.",
+      achievements: ["Schema design", "Aggregation pipelines", "Indexing strategies", "Node.js integration"]
+    },
+    MySQL: {
+      description: "🐬 Relational database expert with MySQL. Query optimization, stored procedures, database normalization, and performance tuning for high-traffic applications.",
+      achievements: ["Query optimization", "Stored procedures", "Database normalization", "Performance tuning"]
+    },
+    PostgreSQL: {
+      description: "🐘 Advanced PostgreSQL user with complex queries, JSON operations, and database administration. Experience with advanced features like window functions and custom data types.",
+      achievements: ["Complex queries", "JSON operations", "Window functions", "Custom data types"]
+    },
+    Git: {
+      description: "🌿 Version control expert with Git workflows. Proficient in branching strategies, merge conflict resolution, rebasing, and collaborative development practices for team projects.",
+      achievements: ["Branching strategies", "Conflict resolution", "Team collaboration", "Git workflows"]
+    },
+    GitHub: {
+      description: "🙈 GitHub power user managing repositories, pull requests, and CI/CD workflows. Experience with GitHub Actions, project management, and open-source contribution.",
+      achievements: ["Repository management", "CI/CD workflows", "GitHub Actions", "Open-source contributions"]
+    },
+    'VS Code': {
+      description: "💻 VS Code master with custom configurations, extensions, and debugging setups. Optimized development environment for multiple programming languages and frameworks.",
+      achievements: ["Custom configurations", "Extension development", "Debugging setups", "Multi-language support"]
+    },
+    Jupyter: {
+      description: "📊 Jupyter notebook specialist for data science and research. Created interactive data visualizations, documented analysis workflows, and shared reproducible research.",
+      achievements: ["Data visualizations", "Analysis workflows", "Reproducible research", "Interactive notebooks"]
+    },
+    Postman: {
+      description: "🚀 API testing and development expert. Automated API testing suites, environment management, and comprehensive API documentation for REST and GraphQL services.",
+      achievements: ["API testing suites", "Environment management", "API documentation", "GraphQL testing"]
+    },
+    PyCharm: {
+      description: "🧠 Professional Python IDE user with advanced debugging, refactoring, and project management. Configured for Django development and data science workflows.",
+      achievements: ["Advanced debugging", "Code refactoring", "Django development", "Data science workflows"]
+    },
+    SQL: {
+      description: "🗃️ Database query optimization specialist. Written complex queries, stored procedures, and database schema design for high-performance applications.",
+      achievements: ["Query optimization", "Stored procedures", "Schema design", "Performance tuning"]
+    },
+    TensorFlow: {
+      description: "🧠 Machine learning with TensorFlow and Keras. Built neural networks, image classification models, and deployed ML models to production environments.",
+      achievements: ["Neural networks", "Image classification", "Model deployment", "Production ML"]
+    },
+    Tableau: {
+      description: "📈 Data visualization and business intelligence with Tableau. Created interactive dashboards, performed data analysis, and presented insights to stakeholders.",
+      achievements: ["Interactive dashboards", "Data analysis", "Business intelligence", "Stakeholder presentations"]
+    },
+    Blender: {
+      description: "🎬 3D modeling and animation with Blender. Created 3D assets, animations, and visual effects for web applications and presentations.",
+      achievements: ["3D modeling", "Animation creation", "Visual effects", "Asset development"]
+    },
+    Canva: {
+      description: "🎨 Graphic design for marketing materials, social media content, and professional presentations. Brand consistency and visual communication expertise.",
+      achievements: ["Marketing materials", "Social media content", "Brand consistency", "Visual communication"]
+    },
+    Figma: {
+      description: "🎯 UI/UX design and prototyping with Figma. Collaborative design workflows, design systems, and user interface development for web and mobile applications.",
+      achievements: ["UI/UX design", "Design systems", "Prototyping", "Collaborative workflows"]
+    }
+  }
+};
+
+const Skills = () => {
+  const [expandedCategory, setExpandedCategory] = useState('');
+  const [selectedSkill, setSelectedSkill] = useState<string | null>(null);
+  const [hoveredSkill, setHoveredSkill] = useState<string | null>(null);
+
+  const selectedSkills = useMemo(() => {
+    if (!expandedCategory || !(expandedCategory in skillsData.categories)) return [];
+    return skillsData.categories[expandedCategory as keyof typeof skillsData.categories].skills;
+  }, [expandedCategory]);
+
+  const handleCategoryClick = (category: string) => {
+    // Toggle functionality - if clicking the same category, close it
+    if (expandedCategory === category) {
+      setExpandedCategory('');
+    } else {
+      setExpandedCategory(category);
+    }
+    setSelectedSkill(null);
+    setHoveredSkill(null);
   };
-  return iconMap[skillName] || `${skillName.toLowerCase()}.svg`;
-};
 
-// Generate skills array with computed angles
-const generateSkills = (): Skill[] => {
-  const allSkills: Skill[] = [];
-  let currentAngle = 0;
-  const totalSkills = getTotalSkillCount();
-  
-  Object.entries(SKILL_CATEGORIES).forEach(([category, skillNames]) => {
-    skillNames.forEach((skillName) => {
-      const id = skillName.toLowerCase().replace(/[^a-z0-9]/g, '');
-      allSkills.push({
-        id,
-        label: skillName,
-        category,
-        icon: `/src/assets/icon/${getIconFileName(skillName)}`,
-        ariaLabel: `${skillName} — ${category}`,
-        angle: currentAngle
-      });
-      // Distribute skills evenly around the circle
-      currentAngle += 360 / totalSkills;
-    });
-  });
-  
-  return allSkills;
-};
+  const handleSkillClick = (skill: string) => {
+    setSelectedSkill(prev => prev === skill ? null : skill);
+  };
 
-const SkillOrbit: React.FC = () => {
-  const orbitRef = useRef<HTMLDivElement>(null);
-  const skills = generateSkills();
-
-  /**
-   * Dynamic radius calculation for responsive design
-   * Uses CSS variables to control orbit size without re-rendering
-   */
-  useEffect(() => {
-    const updateRadius = () => {
-      if (orbitRef.current) {
-        const containerSize = Math.min(orbitRef.current.clientWidth, orbitRef.current.clientHeight);
-        const radius = containerSize * 0.35; // 35% of container size
-        const cardSize = Math.max(48, Math.min(64, containerSize * 0.08)); // Responsive card size
-        
-        orbitRef.current.style.setProperty('--orbit-radius', `${radius}px`);
-        orbitRef.current.style.setProperty('--card-size', `${cardSize}px`);
-      }
-    };
-
-    updateRadius();
-    window.addEventListener('resize', updateRadius);
-    return () => window.removeEventListener('resize', updateRadius);
-  }, []);
+  const closeSkillDetails = () => {
+    setSelectedSkill(null);
+  };
 
   return (
-    <section 
-      id="skills" 
-      className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 dark:from-gray-950 dark:via-blue-950 dark:to-indigo-950 py-16 px-4"
+    <motion.section 
+      className="min-h-screen relative overflow-hidden"
+      style={{
+        background: 'linear-gradient(135deg, #111827 0%, #1f2937 50%, #000000 100%)'
+      }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.8 }}
     >
-      <div className="w-full max-w-6xl mx-auto">
-        {/* Section Header */}
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
-            Skills & Technologies
-          </h2>
-          <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-            A comprehensive overview of the technologies and tools I work with, 
-            organized by category and continuously expanding.
-          </p>
-        </div>
+      {/* Contact-style background orbs */}
+      <motion.div 
+        animate={{ 
+          x: [0, 40, 0], 
+          y: [0, -25, 0],
+          rotate: [0, 180, 360]
+        }}
+        transition={{ 
+          duration: 22, 
+          repeat: Infinity, 
+          ease: "linear" 
+        }}
+        className="absolute top-[15%] left-[10%] w-[280px] h-[280px] rounded-full pointer-events-none z-[1]"
+        style={{
+          background: 'linear-gradient(to right, rgba(245, 158, 11, 0.2), rgba(234, 179, 8, 0.2))',
+          mixBlendMode: 'multiply',
+          filter: 'blur(3rem)'
+        }}
+      />
+      <motion.div 
+        animate={{ 
+          x: [0, -35, 0], 
+          y: [0, 25, 0],
+          rotate: [360, 180, 0]
+        }}
+        transition={{ 
+          duration: 28, 
+          repeat: Infinity, 
+          ease: "linear" 
+        }}
+        className="absolute bottom-[25%] right-[15%] w-[220px] h-[220px] rounded-full pointer-events-none z-[1]"
+        style={{
+          background: 'linear-gradient(to right, rgba(251, 146, 60, 0.2), rgba(245, 158, 11, 0.2))',
+          mixBlendMode: 'multiply',
+          filter: 'blur(3rem)'
+        }}
+      />
+      <motion.div 
+        animate={{ 
+          x: [0, 30, 0], 
+          y: [0, -20, 0],
+          rotate: [0, -180, -360]
+        }}
+        transition={{ 
+          duration: 24, 
+          repeat: Infinity, 
+          ease: "linear" 
+        }}
+        className="absolute top-[45%] right-[35%] w-[180px] h-[180px] rounded-full pointer-events-none z-[1]"
+        style={{
+          background: 'linear-gradient(to right, rgba(252, 211, 77, 0.15), rgba(251, 191, 36, 0.15))',
+          mixBlendMode: 'multiply',
+          filter: 'blur(3rem)'
+        }}
+      />
 
-        {/* Skill Orbit Container */}
-        <div 
-          ref={orbitRef} 
-          className="relative mx-auto aspect-square w-full max-w-2xl"
-          style={{
-            '--orbit-radius': '200px',
-            '--card-size': '56px'
-          } as React.CSSProperties}
+      {/* Main content container - Contact style */}
+      <motion.div 
+        className="max-w-7xl mx-auto px-6 py-20 relative z-10"
+        initial={{ y: 50, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.8, delay: 0.2 }}
+      >
+        {/* Header Section - Contact style */}
+        <motion.div 
+          className="text-center mb-16"
+          initial={{ y: 30, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.6, delay: 0.3 }}
         >
-          {/* Central Profile */}
-          <div
-            className="absolute left-1/2 top-1/2 z-20 flex -translate-x-1/2 -translate-y-1/2 flex-col items-center"
-            role="figure"
-            aria-label="Profile of Abunesh RP, Software Engineer"
+          <motion.h2 
+            className="text-6xl md:text-7xl font-bold mb-6 leading-tight"
+            style={{
+              background: 'linear-gradient(135deg, #f59e0b, #fbbf24, #fcd34d)',
+              WebkitBackgroundClip: 'text',
+              backgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              color: 'transparent'
+            }}
+            initial={{ scale: 0.9, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
           >
-            <div className="flex h-24 w-24 md:h-32 md:w-32 items-center justify-center rounded-full bg-gradient-to-br from-blue-600 to-purple-600 text-white text-2xl md:text-3xl font-bold shadow-lg border-4 border-white dark:border-gray-800 overflow-hidden">
-              <img
-                src={profileImg}
-                alt="Abunesh RP"
-                className="h-full w-full object-cover rounded-full"
-              />
+            {skillsData.title}
+          </motion.h2>
+          <motion.p 
+            className="text-lg text-gray-200 max-w-4xl mx-auto leading-relaxed"
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.6, delay: 0.5 }}
+          >
+            {skillsData.description}
+          </motion.p>
+        </motion.div>
+
+        <motion.div 
+          className="grid lg:grid-cols-12 gap-8"
+          initial={{ y: 40, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.8, delay: 0.6 }}
+        >
+          {/* Left Sidebar - Categories */}
+          <motion.div
+            className="lg:col-span-3"
+            initial={{ x: -40, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.7 }}
+          >
+            <div 
+              className="sticky top-8 p-6 rounded-xl border backdrop-filter backdrop-blur-lg"
+              style={{
+                background: 'rgba(26, 32, 44, 0.8)',
+                borderColor: 'rgba(245, 158, 11, 0.2)'
+              }}
+            >
+              <h3 className="text-lg font-semibold text-gray-100 mb-6">Categories</h3>
+              <div className="space-y-2">
+                {Object.entries(skillsData.categories).map(([name], index) => {
+                  const IconComponent = categoryIcons[name as keyof typeof categoryIcons];
+                  const isExpanded = expandedCategory === name;
+                  
+                  return (
+                    <motion.button
+                      key={name}
+                      onClick={() => handleCategoryClick(name)}
+                      className={`w-full flex items-center justify-between p-4 rounded-lg transition-all duration-300 group ${
+                        isExpanded 
+                          ? 'text-amber-200 border border-amber-500/40 shadow-lg shadow-amber-500/20' 
+                          : 'text-gray-200 hover:text-amber-100 border border-transparent hover:border-amber-500/20'
+                      }`}
+                      style={{
+                        background: isExpanded 
+                          ? 'rgba(245, 158, 11, 0.1)' 
+                          : 'transparent'
+                      }}
+                      initial={{ y: 30, opacity: 0 }}
+                      animate={{ y: 0, opacity: 1 }}
+                      transition={{ 
+                        duration: 0.5, 
+                        delay: 0.8 + index * 0.1 
+                      }}
+                      whileHover={{ 
+                        y: -2,
+                        transition: { duration: 0.2 }
+                      }}
+                    >
+                      <div className="flex items-center gap-3">
+                        <IconComponent className="w-5 h-5 flex-shrink-0" />
+                        <span className="font-medium">{name}</span>
+                      </div>
+                      <motion.div
+                        className={`transition-transform duration-200 ${
+                          isExpanded ? 'rotate-180' : 'rotate-0'
+                        }`}
+                        whileHover={{ scale: 1.1 }}
+                        transition={{ duration: 0.2 }}
+                      >
+                        <ChevronDown className="w-4 h-4" />
+                      </motion.div>
+                    </motion.button>
+                  );
+                })}
+              </div>
             </div>
-            <h3 className="mt-3 text-lg md:text-xl font-semibold text-gray-900 dark:text-white">
-              Abunesh RP
-            </h3>
-            <p className="text-sm md:text-base text-gray-600 dark:text-gray-300">
-              Software Engineer
-            </p>
-          </div>
+          </motion.div>
 
-          {/* Single Rotating Container - GPU Accelerated */}
-          <div className="orbit-container absolute inset-0 orbit-rotation">
-            {skills.map(({ id, label, icon, ariaLabel, angle, category }) => (
-              <div
-                key={id}
-                className="absolute left-1/2 top-1/2 origin-center"
-                style={{ 
-                  transform: `rotate(${angle}deg) translateY(calc(var(--orbit-radius) * -1))`,
-                }}
-              >
-                {/* Connection Line - Rotates with spoke */}
-                <div 
-                  className="absolute top-0 left-1/2 w-0.5 bg-gradient-to-t from-gray-300 to-transparent dark:from-gray-600 -translate-x-1/2 origin-top"
-                  style={{ 
-                    height: 'var(--orbit-radius)',
-                    transform: 'translateY(-100%)'
-                  }}
-                />
+          {/* Right Content Area - Skills Grid */}
+          <motion.div
+            className="lg:col-span-9"
+            initial={{ x: 40, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.9 }}
+          >
+            <div className="mb-8">
+              {expandedCategory ? (
+                <>
+                  <div className="flex items-center justify-between mb-6">
+                    <h3 className="text-3xl font-bold text-amber-100">{expandedCategory}</h3>
+                    <div 
+                      className="px-4 py-2 rounded-full border text-sm font-mono text-amber-200 shadow-lg"
+                      style={{
+                        background: 'rgba(26, 32, 44, 0.3)',
+                        borderColor: 'rgba(245, 158, 11, 0.2)',
+                        backdropFilter: 'blur(20px)'
+                      }}
+                    >
+                      {selectedSkills.length} skills
+                    </div>
+                  </div>
 
-                {/* Skill Card - Counter-rotated to stay upright */}
-                <div
-                  tabIndex={0}
-                  role="button"
-                  aria-label={ariaLabel}
-                  className="group relative flex items-center justify-center rounded-full bg-white dark:bg-gray-800 shadow-lg border-2 border-gray-200 dark:border-gray-700 cursor-pointer transition-all duration-300 hover:scale-110 hover:shadow-xl hover:border-blue-400 dark:hover:border-blue-500 focus:outline-none focus:ring-4 focus:ring-blue-500/50 focus:scale-110"
-                  style={{
-                    width: 'var(--card-size)',
-                    height: 'var(--card-size)',
-                    transform: `rotate(${-angle}deg)`, // Counter-rotation to keep upright
-                  }}
+                  {/* Skills Grid with Card Flip Effect */}
+                  <motion.div 
+                    className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
+                    variants={containerVariants}
+                    initial="hidden"
+                    animate="visible"
+                  >
+                    <AnimatePresence mode="wait">
+                      {selectedSkills.map((skillName: string, index: number) => {
+                    const skill = skillsData.skills[skillName as keyof typeof skillsData.skills];
+                    if (!skill) return null;
+                    
+                    const isHovered = hoveredSkill === skillName;
+                    const isSelected = selectedSkill === skillName;
+                    
+                    return (
+                      <motion.div
+                        key={`${expandedCategory}-${skillName}`}
+                        className="relative"
+                        style={{ 
+                          perspective: '1000px',
+                          transformStyle: 'preserve-3d'
+                        }}
+                        initial={{ opacity: 0, scale: 0.8, rotateY: -90 }}
+                        animate={{ 
+                          opacity: 1, 
+                          scale: 1, 
+                          rotateY: 0 
+                        }}
+                        exit={{ 
+                          opacity: 0, 
+                          scale: 0.8, 
+                          rotateY: 90 
+                        }}
+                        transition={{ 
+                          duration: 0.3, 
+                          delay: index * 0.03,
+                          ease: "easeOut"
+                        }}
+                        whileHover={{ 
+                          scale: 1.05,
+                          z: 50
+                        }}
+                        onHoverStart={() => setHoveredSkill(skillName)}
+                        onHoverEnd={() => setHoveredSkill(null)}
+                        onClick={() => handleSkillClick(skillName)}
+                      >
+                        {/* Card Container */}
+                        <div 
+                          className="relative w-full h-40 cursor-pointer"
+                          style={{
+                            transformStyle: 'preserve-3d',
+                            transform: isHovered ? 'rotateY(180deg)' : 'rotateY(0deg)',
+                            transition: 'transform 0.6s ease-in-out'
+                          }}
+                        >
+                          {/* Front of card */}
+                          <div
+                            className={`absolute inset-0 p-6 rounded-xl backdrop-filter backdrop-blur-lg transition-all duration-300 ${
+                              isSelected
+                                ? 'border-amber-400/50 shadow-lg shadow-amber-500/25 ring-2 ring-amber-400/30'
+                                : 'border-slate-600/30 hover:border-amber-500/40'
+                            }`}
+                            style={{
+                              background: isSelected 
+                                ? 'rgba(245, 158, 11, 0.1)' 
+                                : 'rgba(26, 32, 44, 0.2)',
+                              borderWidth: '1px',
+                              borderStyle: 'solid',
+                              backfaceVisibility: 'hidden'
+                            }}
+                          >
+                            <div className="flex flex-col items-center justify-center text-center h-full space-y-3">
+                              <div className={`p-3 rounded-xl transition-all duration-300 ${
+                                isSelected ? 'scale-110' : ''
+                              }`}
+                              style={{
+                                background: isSelected 
+                                  ? 'rgba(245, 158, 11, 0.2)' 
+                                  : 'rgba(71, 85, 105, 0.3)'
+                              }}
+                              >
+                                <img 
+                                  src={skillIcons[skillName]} 
+                                  alt={skillName}
+                                  className="w-8 h-8"
+                                />
+                              </div>
+                              <h3 className={`font-semibold transition-colors ${
+                                isSelected ? 'text-amber-100' : 'text-gray-200'
+                              }`}>
+                                {skillName}
+                              </h3>
+                            </div>
+                          </div>
+
+                          {/* Back of card - What I learned */}
+                          <div
+                            className="absolute inset-0 p-4 rounded-xl backdrop-filter backdrop-blur-lg border border-amber-500/40"
+                            style={{
+                              background: 'rgba(245, 158, 11, 0.15)',
+                              backfaceVisibility: 'hidden',
+                              transform: 'rotateY(180deg)'
+                            }}
+                          >
+                            <div className="h-full flex flex-col justify-center text-center space-y-2">
+                              <h4 className="text-amber-100 font-semibold text-sm mb-2">What I've Learned</h4>
+                              <div className="space-y-1">
+                                {skill.achievements.slice(0, 3).map((achievement: string, idx: number) => (
+                                  <div key={idx} className="text-xs text-gray-200 leading-tight">
+                                    • {achievement}
+                                  </div>
+                                ))}
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </motion.div>
+                    );
+                  })}
+                </AnimatePresence>
+              </motion.div>
+                </>
+              ) : (
+                <motion.div 
+                  className="text-center py-20"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5 }}
                 >
-                  {/* Skill Icon */}
+                  {/* Default 12 Skills Grid */}
+                  <motion.div 
+                    className="grid grid-cols-4 gap-6 max-w-2xl mx-auto"
+                    variants={containerVariants}
+                    initial="hidden"
+                    animate="visible"
+                  >
+                    {/* First Column - HTML, CSS, JavaScript */}
+                    {[
+                      { name: 'HTML5', icon: HTMLIcon },
+                      { name: 'CSS3', icon: CSSIcon },
+                      { name: 'JavaScript', icon: JavaScriptIcon }
+                    ].map((skill, index) => (
+                      <motion.div
+                        key={skill.name}
+                        className="relative"
+                        style={{ 
+                          perspective: '1000px',
+                          transformStyle: 'preserve-3d'
+                        }}
+                        initial={{ opacity: 0, scale: 0.8, rotateY: -90 }}
+                        animate={{ 
+                          opacity: 1, 
+                          scale: 1, 
+                          rotateY: 0 
+                        }}
+                        transition={{ 
+                          duration: 0.3, 
+                          delay: index * 0.05,
+                          ease: "easeOut"
+                        }}
+                        whileHover={{ 
+                          scale: 1.05,
+                          z: 50
+                        }}
+                        onHoverStart={() => setHoveredSkill(skill.name)}
+                        onHoverEnd={() => setHoveredSkill(null)}
+                        onClick={() => handleSkillClick(skill.name)}
+                      >
+                        {/* Card Container */}
+                        <div 
+                          className="relative w-full h-40 cursor-pointer"
+                          style={{
+                            transformStyle: 'preserve-3d',
+                            transform: hoveredSkill === skill.name ? 'rotateY(180deg)' : 'rotateY(0deg)',
+                            transition: 'transform 0.6s ease-in-out'
+                          }}
+                        >
+                          {/* Front of card */}
+                          <div
+                            className="absolute inset-0 p-6 rounded-xl backdrop-filter backdrop-blur-lg border border-slate-600/30 hover:border-amber-500/40 transition-all duration-300"
+                            style={{
+                              background: 'rgba(26, 32, 44, 0.2)',
+                              backfaceVisibility: 'hidden'
+                            }}
+                          >
+                            <div className="flex flex-col items-center justify-center text-center h-full space-y-3">
+                              <div 
+                                className="p-3 rounded-xl transition-all duration-300"
+                                style={{
+                                  background: 'rgba(71, 85, 105, 0.3)'
+                                }}
+                              >
+                                <img 
+                                  src={skill.icon} 
+                                  alt={skill.name}
+                                  className="w-8 h-8"
+                                />
+                              </div>
+                              <h3 className="font-semibold text-gray-200">
+                                {skill.name}
+                              </h3>
+                            </div>
+                          </div>
+
+                          {/* Back of card - What I learned */}
+                          <div
+                            className="absolute inset-0 p-4 rounded-xl backdrop-filter backdrop-blur-lg border border-amber-500/40"
+                            style={{
+                              background: 'rgba(245, 158, 11, 0.15)',
+                              backfaceVisibility: 'hidden',
+                              transform: 'rotateY(180deg)'
+                            }}
+                          >
+                            <div className="h-full flex flex-col justify-center text-center space-y-2">
+                              <h4 className="text-amber-100 font-semibold text-sm mb-2">What I've Learned</h4>
+                              <div className="space-y-1">
+                                {skillsData.skills[skill.name as keyof typeof skillsData.skills]?.achievements.slice(0, 3).map((achievement: string, idx: number) => (
+                                  <div key={idx} className="text-xs text-gray-200 leading-tight">
+                                    • {achievement}
+                                  </div>
+                                ))}
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </motion.div>
+                    ))}
+
+                    {/* Second Column - Python and related */}
+                    {[
+                      { name: 'Python', icon: PythonIcon },
+                      { name: 'TensorFlow', icon: TensorFlowIcon },
+                      { name: 'Jupyter', icon: JupyterIcon }
+                    ].map((skill, index) => (
+                      <motion.div
+                        key={skill.name}
+                        className="relative"
+                        style={{ 
+                          perspective: '1000px',
+                          transformStyle: 'preserve-3d'
+                        }}
+                        initial={{ opacity: 0, scale: 0.8, rotateY: -90 }}
+                        animate={{ 
+                          opacity: 1, 
+                          scale: 1, 
+                          rotateY: 0 
+                        }}
+                        transition={{ 
+                          duration: 0.3, 
+                          delay: (index + 3) * 0.05,
+                          ease: "easeOut"
+                        }}
+                        whileHover={{ 
+                          scale: 1.05,
+                          z: 50
+                        }}
+                        onHoverStart={() => setHoveredSkill(skill.name)}
+                        onHoverEnd={() => setHoveredSkill(null)}
+                        onClick={() => handleSkillClick(skill.name)}
+                      >
+                        {/* Card Container */}
+                        <div 
+                          className="relative w-full h-40 cursor-pointer"
+                          style={{
+                            transformStyle: 'preserve-3d',
+                            transform: hoveredSkill === skill.name ? 'rotateY(180deg)' : 'rotateY(0deg)',
+                            transition: 'transform 0.6s ease-in-out'
+                          }}
+                        >
+                          {/* Front of card */}
+                          <div
+                            className="absolute inset-0 p-6 rounded-xl backdrop-filter backdrop-blur-lg border border-slate-600/30 hover:border-amber-500/40 transition-all duration-300"
+                            style={{
+                              background: 'rgba(26, 32, 44, 0.2)',
+                              backfaceVisibility: 'hidden'
+                            }}
+                          >
+                            <div className="flex flex-col items-center justify-center text-center h-full space-y-3">
+                              <div 
+                                className="p-3 rounded-xl transition-all duration-300"
+                                style={{
+                                  background: 'rgba(71, 85, 105, 0.3)'
+                                }}
+                              >
+                                <img 
+                                  src={skill.icon} 
+                                  alt={skill.name}
+                                  className="w-8 h-8"
+                                />
+                              </div>
+                              <h3 className="font-semibold text-gray-200">
+                                {skill.name}
+                              </h3>
+                            </div>
+                          </div>
+
+                          {/* Back of card - What I learned */}
+                          <div
+                            className="absolute inset-0 p-4 rounded-xl backdrop-filter backdrop-blur-lg border border-amber-500/40"
+                            style={{
+                              background: 'rgba(245, 158, 11, 0.15)',
+                              backfaceVisibility: 'hidden',
+                              transform: 'rotateY(180deg)'
+                            }}
+                          >
+                            <div className="h-full flex flex-col justify-center text-center space-y-2">
+                              <h4 className="text-amber-100 font-semibold text-sm mb-2">What I've Learned</h4>
+                              <div className="space-y-1">
+                                {skillsData.skills[skill.name as keyof typeof skillsData.skills]?.achievements.slice(0, 3).map((achievement: string, idx: number) => (
+                                  <div key={idx} className="text-xs text-gray-200 leading-tight">
+                                    • {achievement}
+                                  </div>
+                                ))}
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </motion.div>
+                    ))}
+
+                    {/* Third Column - GitHub and related */}
+                    {[
+                      { name: 'GitHub', icon: GitHubIcon },
+                      { name: 'Git', icon: GitIcon },
+                      { name: 'VS Code', icon: VSCodeIcon }
+                    ].map((skill, index) => (
+                      <motion.div
+                        key={skill.name}
+                        className="relative"
+                        style={{ 
+                          perspective: '1000px',
+                          transformStyle: 'preserve-3d'
+                        }}
+                        initial={{ opacity: 0, scale: 0.8, rotateY: -90 }}
+                        animate={{ 
+                          opacity: 1, 
+                          scale: 1, 
+                          rotateY: 0 
+                        }}
+                        transition={{ 
+                          duration: 0.3, 
+                          delay: (index + 6) * 0.05,
+                          ease: "easeOut"
+                        }}
+                        whileHover={{ 
+                          scale: 1.05,
+                          z: 50
+                        }}
+                        onHoverStart={() => setHoveredSkill(skill.name)}
+                        onHoverEnd={() => setHoveredSkill(null)}
+                        onClick={() => handleSkillClick(skill.name)}
+                      >
+                        {/* Card Container */}
+                        <div 
+                          className="relative w-full h-40 cursor-pointer"
+                          style={{
+                            transformStyle: 'preserve-3d',
+                            transform: hoveredSkill === skill.name ? 'rotateY(180deg)' : 'rotateY(0deg)',
+                            transition: 'transform 0.6s ease-in-out'
+                          }}
+                        >
+                          {/* Front of card */}
+                          <div
+                            className="absolute inset-0 p-6 rounded-xl backdrop-filter backdrop-blur-lg border border-slate-600/30 hover:border-amber-500/40 transition-all duration-300"
+                            style={{
+                              background: 'rgba(26, 32, 44, 0.2)',
+                              backfaceVisibility: 'hidden'
+                            }}
+                          >
+                            <div className="flex flex-col items-center justify-center text-center h-full space-y-3">
+                              <div 
+                                className="p-3 rounded-xl transition-all duration-300"
+                                style={{
+                                  background: 'rgba(71, 85, 105, 0.3)'
+                                }}
+                              >
+                                <img 
+                                  src={skill.icon} 
+                                  alt={skill.name}
+                                  className="w-8 h-8"
+                                />
+                              </div>
+                              <h3 className="font-semibold text-gray-200">
+                                {skill.name}
+                              </h3>
+                            </div>
+                          </div>
+
+                          {/* Back of card - What I learned */}
+                          <div
+                            className="absolute inset-0 p-4 rounded-xl backdrop-filter backdrop-blur-lg border border-amber-500/40"
+                            style={{
+                              background: 'rgba(245, 158, 11, 0.15)',
+                              backfaceVisibility: 'hidden',
+                              transform: 'rotateY(180deg)'
+                            }}
+                          >
+                            <div className="h-full flex flex-col justify-center text-center space-y-2">
+                              <h4 className="text-amber-100 font-semibold text-sm mb-2">What I've Learned</h4>
+                              <div className="space-y-1">
+                                {skillsData.skills[skill.name as keyof typeof skillsData.skills]?.achievements.slice(0, 3).map((achievement: string, idx: number) => (
+                                  <div key={idx} className="text-xs text-gray-200 leading-tight">
+                                    • {achievement}
+                                  </div>
+                                ))}
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </motion.div>
+                    ))}
+
+                    {/* Fourth Column - Canva and related */}
+                    {[
+                      { name: 'Canva', icon: CanvaIcon },
+                      { name: 'Figma', icon: FigmaIcon },
+                      { name: 'Blender', icon: BlenderIcon }
+                    ].map((skill, index) => (
+                      <motion.div
+                        key={skill.name}
+                        className="relative"
+                        style={{ 
+                          perspective: '1000px',
+                          transformStyle: 'preserve-3d'
+                        }}
+                        initial={{ opacity: 0, scale: 0.8, rotateY: -90 }}
+                        animate={{ 
+                          opacity: 1, 
+                          scale: 1, 
+                          rotateY: 0 
+                        }}
+                        transition={{ 
+                          duration: 0.3, 
+                          delay: (index + 9) * 0.05,
+                          ease: "easeOut"
+                        }}
+                        whileHover={{ 
+                          scale: 1.05,
+                          z: 50
+                        }}
+                        onHoverStart={() => setHoveredSkill(skill.name)}
+                        onHoverEnd={() => setHoveredSkill(null)}
+                        onClick={() => handleSkillClick(skill.name)}
+                      >
+                        {/* Card Container */}
+                        <div 
+                          className="relative w-full h-40 cursor-pointer"
+                          style={{
+                            transformStyle: 'preserve-3d',
+                            transform: hoveredSkill === skill.name ? 'rotateY(180deg)' : 'rotateY(0deg)',
+                            transition: 'transform 0.6s ease-in-out'
+                          }}
+                        >
+                          {/* Front of card */}
+                          <div
+                            className="absolute inset-0 p-6 rounded-xl backdrop-filter backdrop-blur-lg border border-slate-600/30 hover:border-amber-500/40 transition-all duration-300"
+                            style={{
+                              background: 'rgba(26, 32, 44, 0.2)',
+                              backfaceVisibility: 'hidden'
+                            }}
+                          >
+                            <div className="flex flex-col items-center justify-center text-center h-full space-y-3">
+                              <div 
+                                className="p-3 rounded-xl transition-all duration-300"
+                                style={{
+                                  background: 'rgba(71, 85, 105, 0.3)'
+                                }}
+                              >
+                                <img 
+                                  src={skill.icon} 
+                                  alt={skill.name}
+                                  className="w-8 h-8"
+                                />
+                              </div>
+                              <h3 className="font-semibold text-gray-200">
+                                {skill.name}
+                              </h3>
+                            </div>
+                          </div>
+
+                          {/* Back of card - What I learned */}
+                          <div
+                            className="absolute inset-0 p-4 rounded-xl backdrop-filter backdrop-blur-lg border border-amber-500/40"
+                            style={{
+                              background: 'rgba(245, 158, 11, 0.15)',
+                              backfaceVisibility: 'hidden',
+                              transform: 'rotateY(180deg)'
+                            }}
+                          >
+                            <div className="h-full flex flex-col justify-center text-center space-y-2">
+                              <h4 className="text-amber-100 font-semibold text-sm mb-2">What I've Learned</h4>
+                              <div className="space-y-1">
+                                {skillsData.skills[skill.name as keyof typeof skillsData.skills]?.achievements.slice(0, 3).map((achievement: string, idx: number) => (
+                                  <div key={idx} className="text-xs text-gray-200 leading-tight">
+                                    • {achievement}
+                                  </div>
+                                ))}
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </motion.div>
+                    ))}
+                  </motion.div>
+                </motion.div>
+              )}
+            </div>
+          </motion.div>
+        </motion.div>
+      </motion.div>
+
+      {/* Skill Details Modal */}
+      <AnimatePresence>
+        {selectedSkill && (
+          <motion.div
+            className="fixed inset-0 z-50 flex items-center justify-center p-4"
+            style={{ background: 'rgba(0, 0, 0, 0.8)', backdropFilter: 'blur(4px)' }}
+            onClick={closeSkillDetails}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            <motion.div
+              className="relative max-w-lg w-full rounded-2xl border p-8 shadow-2xl"
+              style={{
+                background: 'rgba(15, 23, 42, 0.9)',
+                borderColor: 'rgba(245, 158, 11, 0.2)',
+                backdropFilter: 'blur(20px)'
+              }}
+              onClick={(e) => e.stopPropagation()}
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.8, opacity: 0 }}
+              transition={{ duration: 0.3 }}
+            >
+              <button
+                onClick={closeSkillDetails}
+                className="absolute top-4 right-4 p-2 text-gray-300 hover:text-amber-100 transition-colors rounded-lg"
+                style={{ background: 'rgba(71, 85, 105, 0.5)' }}
+              >
+                <X className="w-5 h-5" />
+              </button>
+
+              <div className="flex items-center gap-4 mb-6">
+                <div 
+                  className="p-4 rounded-xl"
+                  style={{ background: 'rgba(245, 158, 11, 0.2)' }}
+                >
                   <img 
-                    src={icon} 
-                    alt="" 
-                    className="w-6 h-6 md:w-8 md:h-8 object-contain"
-                    loading="lazy"
+                    src={skillIcons[selectedSkill]} 
+                    alt={selectedSkill}
+                    className="w-10 h-10 brightness-110"
                   />
-
-                  {/* Tooltip - Appears on hover/focus */}
-                  <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-1.5 bg-gray-900 dark:bg-gray-700 text-white text-sm font-medium rounded-lg shadow-lg opacity-0 group-hover:opacity-100 group-focus:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap z-30">
-                    <span>{label}</span>
-                    <div className="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-gray-900 dark:border-t-gray-700" />
-                  </div>
-
-                  {/* Category Badge */}
-                  <div className="absolute -top-2 -right-2 px-2 py-0.5 bg-blue-500 text-white text-xs font-medium rounded-full opacity-0 group-hover:opacity-100 group-focus:opacity-100 transition-opacity duration-200 whitespace-nowrap">
-                    {category}
-                  </div>
+                </div>
+                <div>
+                  <h2 className="text-2xl font-bold text-amber-100">{selectedSkill}</h2>
                 </div>
               </div>
-            ))}
-          </div>
 
-          {/* Orbit Ring Indicator */}
-          <div 
-            className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 border border-gray-200 dark:border-gray-700 rounded-full opacity-20"
-            style={{
-              width: 'calc(var(--orbit-radius) * 2)',
-              height: 'calc(var(--orbit-radius) * 2)'
-            }}
-          />
-        </div>
+              <p className="text-gray-200 leading-relaxed text-lg mb-6">
+                {skillsData.skills[selectedSkill as keyof typeof skillsData.skills]?.description}
+              </p>
 
-        {/* Skills Legend */}
-        <div className="mt-16 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 max-w-4xl mx-auto">
-          {Object.entries(SKILL_CATEGORIES).map(([category, skills]) => (
-            <div key={category} className="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-sm border border-gray-200 dark:border-gray-700">
-              <h4 className="font-semibold text-gray-900 dark:text-white mb-2 text-sm">
-                {category.replace('_', '/')}
-              </h4>
-              <div className="text-xs text-gray-600 dark:text-gray-300">
-                {skills.length} skill{skills.length !== 1 ? 's' : ''}
+              <div>
+                <h4 className="text-amber-100 font-semibold mb-3">Key Achievements:</h4>
+                <div className="space-y-2">
+                  {skillsData.skills[selectedSkill as keyof typeof skillsData.skills]?.achievements.map((achievement: string, idx: number) => (
+                    <div key={idx} className="flex items-start gap-2 text-gray-200">
+                      <div 
+                        className="w-2 h-2 rounded-full mt-2 flex-shrink-0"
+                        style={{ background: '#f59e0b' }}
+                      />
+                      <span className="text-sm">{achievement}</span>
+                    </div>
+                  ))}
+                </div>
               </div>
-            </div>
-          ))}
-        </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Enhanced sparkle effects - Contact style */}
+      <div className="absolute inset-0 pointer-events-none">
+        <motion.div 
+          animate={{ 
+            opacity: [0.2, 0.8, 0.2],
+            scale: [0.8, 1.2, 0.8]
+          }}
+          transition={{ 
+            duration: 3, 
+            repeat: Infinity, 
+            delay: 0.5 
+          }}
+          className="absolute top-[20%] right-[10%] w-2 h-2 rounded-full"
+          style={{ background: '#f59e0b' }}
+        />
+        <motion.div 
+          animate={{ 
+            opacity: [0.3, 1, 0.3],
+            scale: [0.5, 1.5, 0.5]
+          }}
+          transition={{ 
+            duration: 2.5, 
+            repeat: Infinity, 
+            delay: 1.5 
+          }}
+          className="absolute bottom-[30%] left-[15%] w-1.5 h-1.5 rounded-full"
+          style={{ background: '#fbbf24' }}
+        />
+        <motion.div 
+          animate={{ 
+            opacity: [0.4, 0.9, 0.4],
+            scale: [0.6, 1.3, 0.6]
+          }}
+          transition={{ 
+            duration: 3.5, 
+            repeat: Infinity, 
+            delay: 2.5 
+          }}
+          className="absolute top-[60%] left-[5%] w-1 h-1 rounded-full"
+          style={{ background: '#fcd34d' }}
+        />
       </div>
-
-      <style jsx>{`
-        .orbit-rotation {
-          animation: orbit-rotate 120s linear infinite;
-        }
-
-        @keyframes orbit-rotate {
-          0% {
-            transform: rotate(0deg);
-          }
-          from {
-            transform: rotate(0deg);
-          }
-          to {
-            transform: rotate(360deg);
-          }
-        }
-        
-        @media (prefers-reduced-motion: reduce) {
-          .orbit-rotation {
-            animation: none;
-          }
-        }
-      `}</style>
-    </section>
+    </motion.section>
   );
 };
 
-export default SkillOrbit;
+export default Skills;
