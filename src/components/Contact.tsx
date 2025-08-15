@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { FiMail, FiPhone } from 'react-icons/fi';
-import '../styles/components.css';
 import ContactForm from './ContactForm';
 
-const Contact: React.FC = () => {
+const Contact = () => {
   const [isVisible, setIsVisible] = useState(false);
 
   // Intersection observer for animations

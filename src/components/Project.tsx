@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { FiGithub, FiExternalLink, FiCode, FiZap } from 'react-icons/fi';
-import '../styles/components.css';
 
 interface Project {
   id: number;
@@ -14,7 +13,7 @@ interface Project {
   featured?: boolean;
 }
 
-const Projects: React.FC = () => {
+const Projects = () => {
   const [isVisible, setIsVisible] = useState(false);
 
   // Intersection observer for animations

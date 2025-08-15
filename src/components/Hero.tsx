@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { motion, Variants } from 'framer-motion';
 import {
   Github,
@@ -12,22 +12,10 @@ import {
 } from 'lucide-react';
 import profileImg from '../assets/profile.png';
 
-// Import CSS styles
-import '../styles/components.css';
-import '../styles/animations.css';
-
 // Type definitions
 interface Role {
   text: string;
   icon: React.ReactNode;
-}
-
-interface HeroProps {
-  name?: string;
-  profileImage?: string;
-  githubUrl?: string;
-  linkedinUrl?: string;
-  description?: string;
 }
 
 // Animation variants with proper typing
@@ -98,13 +86,19 @@ const useRoleCycling = (roles: Role[], interval: number = 3000) => {
   return { currentRole: roles[currentRoleIndex], currentRoleIndex };
 };
 
-const Hero: React.FC<HeroProps> = ({
+const Hero = ({
   name = "Abunesh R P",
   profileImage = profileImg,
   githubUrl = "https://github.com/Abunesh126",
   linkedinUrl = "https://www.linkedin.com/in/abunesh-r-p-803677278/",
   description = "I build powerful, scalable web applications and AI-driven solutions by combining expertise in frontend, backend, and data modeling — delivering innovative products with precision and performance."
-}) => {
+}: {
+  name?: string;
+  profileImage?: string;
+  githubUrl?: string;
+  linkedinUrl?: string;
+  description?: string;
+} = {}) => {
   const roles: Role[] = [
     { text: 'Fullstack Developer', icon: <Code className="w-5 h-5" /> },
     { text: 'Data Analyst', icon: <Database className="w-5 h-5" /> },

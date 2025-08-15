@@ -1,6 +1,4 @@
-import React from 'react';
 import { motion } from 'framer-motion';
-import '../styles/components.css';
 
 // Import social icons
 import gmailIcon from '../assets/footer icon/gmail.svg';
@@ -8,7 +6,7 @@ import githubIcon from '../assets/footer icon/github.svg';
 import linkedinIcon from '../assets/footer icon/linkedin.svg';
 import twitterIcon from '../assets/footer icon/twitter.svg';
 
-const Footer: React.FC = () => {
+const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   const socialLinks = [

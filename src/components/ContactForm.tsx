@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { motion } from 'framer-motion';
 import { FiSend, FiLoader } from 'react-icons/fi';
 
-const ContactForm: React.FC = () => {
+const ContactForm = () => {
   const [formData, setFormData] = useState({
     api_key: "78c4be0c6c8779406b83ded5172480a3",
     name: "",

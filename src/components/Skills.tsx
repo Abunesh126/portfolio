@@ -24,6 +24,7 @@ import TailwindIcon from '../assets/icon/tailwind-css-2.svg';
 import BootstrapIcon from '../assets/icon/bootstrap.svg';
 import NodeIcon from '../assets/icon/nodejs-1.svg';
 import LaravelIcon from '../assets/icon/laravel-2.svg';
+import FlaskIcon from '../assets/icon/flask.svg';
 import MongoDBIcon from '../assets/icon/mongodb-icon-1.svg';
 import MySQLIcon from '../assets/icon/mysql.svg';
 import PostgreSQLIcon from '../assets/icon/postgresql.svg';
@@ -59,6 +60,7 @@ const skillIcons: Record<string, string> = {
   // Backend
   'Node.js': NodeIcon,
   Laravel: LaravelIcon,
+  Flask: FlaskIcon,
   
   // Database
   MongoDB: MongoDBIcon,
@@ -120,7 +122,7 @@ const skillsData = {
     },
     Backend: {
       icon: 'Backend',
-      skills: ['Node.js', 'Laravel']
+      skills: ['Node.js', 'Laravel', 'Flask']
     },
     Database: {
       icon: 'Database',
@@ -183,6 +185,10 @@ const skillsData = {
     Laravel: {
       description: "🔴 PHP Laravel framework expert. Built MVC applications, implemented authentication systems, created RESTful APIs, and managed database relationships with Eloquent ORM.",
       achievements: ["MVC applications", "RESTful APIs", "Eloquent ORM", "Authentication systems"]
+    },
+    Flask: {
+      description: "🌶️ Python Flask microframework specialist. Built lightweight web applications, REST APIs, and microservices. Experience with Jinja2 templating, SQLAlchemy ORM, and Flask extensions for rapid development.",
+      achievements: ["Lightweight web apps", "REST API development", "SQLAlchemy integration", "Microservices architecture"]
     },
     MongoDB: {
       description: "🍃 NoSQL database specialist with MongoDB. Schema design for document databases, aggregation pipelines, indexing strategies, and integration with Node.js applications.",
