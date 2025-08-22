@@ -7,11 +7,14 @@ import {
   Database,
   Brain,
   Rocket,
-  ChevronDown,
   Terminal,
   Zap
 } from 'lucide-react';
 import profileImg from '../assets/profile.png';
+
+// Import CSS styles
+import '../styles/components.css';
+import '../styles/animations.css';
 
 // Type definitions
 interface Role {
@@ -120,44 +123,90 @@ const Hero: React.FC<HeroProps> = ({
 
   return (
     <section 
-      className="relative min-h-screen overflow-hidden"
+      id="hero"
+      className="hero-luxury-section"
       aria-label="Hero section"
       role="banner"
     >
-      {/* Enhanced background with better gradients */}
-      <div className="absolute inset-0">
-        {/* Primary gradient */}
-        <div className="absolute inset-0 bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 dark:from-gray-950 dark:via-blue-950 dark:to-indigo-950" />
+      {/* Enhanced luxury background */}
+      <div className="hero-bg-container">
+        {/* Primary dark luxury gradient */}
+        <div className="hero-bg-primary" />
         
-        {/* Animated background elements */}
+        {/* Animated luxury background elements */}
         <motion.div 
           variants={pulseVariants}
           animate="animate"
-          className="absolute top-10 left-10 w-96 h-96 bg-gradient-to-r from-violet-400 to-purple-400 rounded-full mix-blend-multiply filter blur-3xl opacity-20 dark:opacity-10"
+          className="hero-bg-orb-1"
         />
         <motion.div 
           variants={pulseVariants}
           animate="animate"
           style={{ animationDelay: '2s' }}
-          className="absolute top-40 right-10 w-80 h-80 bg-gradient-to-r from-cyan-400 to-blue-400 rounded-full mix-blend-multiply filter blur-3xl opacity-20 dark:opacity-10"
+          className="hero-bg-orb-2"
         />
         <motion.div 
           variants={pulseVariants}
           animate="animate"
           style={{ animationDelay: '4s' }}
-          className="absolute bottom-20 left-1/4 w-72 h-72 bg-gradient-to-r from-emerald-400 to-teal-400 rounded-full mix-blend-multiply filter blur-3xl opacity-20 dark:opacity-10"
+          className="hero-bg-orb-3"
         />
         
-        {/* Grid pattern overlay */}
-        <div 
-          className="absolute inset-0 opacity-[0.02] dark:opacity-[0.05]"
-          style={{
-            backgroundImage: `
-              linear-gradient(rgba(99, 102, 241, 0.1) 1px, transparent 1px),
-              linear-gradient(90deg, rgba(99, 102, 241, 0.1) 1px, transparent 1px)
-            `,
-            backgroundSize: '50px 50px'
+        {/* Luxury grid pattern overlay */}
+        <div className="hero-grid-pattern" />
+      </div>
+
+      {/* Floating Particles */}
+      <div className="hero-particles-container">
+        <motion.div 
+          animate={{ 
+            y: [0, -20, 0],
+            opacity: [0.4, 0.8, 0.4]
           }}
+          transition={{ 
+            duration: 4, 
+            repeat: Infinity, 
+            delay: 0 
+          }}
+          className="hero-particle hero-particle-1"
+        />
+        <motion.div 
+          animate={{ 
+            y: [0, -15, 0],
+            x: [0, 10, 0],
+            opacity: [0.3, 0.7, 0.3]
+          }}
+          transition={{ 
+            duration: 5, 
+            repeat: Infinity, 
+            delay: 1 
+          }}
+          className="hero-particle hero-particle-2"
+        />
+        <motion.div 
+          animate={{ 
+            y: [0, -25, 0],
+            opacity: [0.5, 1, 0.5]
+          }}
+          transition={{ 
+            duration: 3.5, 
+            repeat: Infinity, 
+            delay: 2 
+          }}
+          className="hero-particle hero-particle-3"
+        />
+        <motion.div 
+          animate={{ 
+            y: [0, -18, 0],
+            x: [0, -8, 0],
+            opacity: [0.4, 0.9, 0.4]
+          }}
+          transition={{ 
+            duration: 4.5, 
+            repeat: Infinity, 
+            delay: 3 
+          }}
+          className="hero-particle hero-particle-4"
         />
       </div>
 
@@ -166,104 +215,104 @@ const Hero: React.FC<HeroProps> = ({
         variants={containerVariants}
         initial="hidden"
         animate="visible"
-        className="relative z-10 flex items-center justify-center min-h-screen px-4 sm:px-6 lg:px-8"
+        className="hero-main-container"
       >
-        <div className="max-w-7xl mx-auto">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
+        <div className="hero-content-wrapper">
+          <div className="hero-grid">
             {/* Left column - Main content */}
-            <div className="text-center lg:text-left space-y-8">
-              
-
-              {/* Profile image */}
-              <motion.div variants={itemVariants} className="flex justify-center lg:justify-start">
-                <div className="relative">
+            <div className="hero-left-column">
+              {/* Profile image with luxury styling */}
+              <motion.div variants={itemVariants} className="hero-profile-wrapper">
+                <div className="hero-profile-container">
                   <motion.div
                     whileHover={{ scale: 1.03 }}
-                    className="relative w-48 h-48 sm:w-56 sm:h-56"
+                    className="hero-profile-motion-wrapper"
                   >
                     {profileImage ? (
                       <img
                         src={profileImage}
                         alt={`${name} - Profile`}
-                        className="w-full h-full object-cover rounded-full border-4 border-indigo-500 shadow-2xl"
+                        className="hero-profile-image"
                         loading="lazy"
                       />
                     ) : (
-                      <div className="w-full h-full bg-gradient-to-br from-indigo-500 to-purple-600 rounded-full border-4 border-indigo-500 shadow-2xl flex items-center justify-center">
-                        <span className="text-4xl sm:text-5xl font-bold text-white">
+                      <div className="hero-profile-fallback">
+                        <span className="hero-profile-initials">
                           {name.split(' ').map(n => n[0]).join('')}
                         </span>
                       </div>
                     )}
-                    <div className="absolute -inset-2 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-full opacity-10 blur-lg" />
+                    <div className="hero-profile-glow" />
                   </motion.div>
+                  {/* Crown decoration */}
+                  <div className="hero-crown">👑</div>
                 </div>
               </motion.div>
 
-              {/* Name */}
-              <motion.h1
-                variants={itemVariants}
-                className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-black bg-gradient-to-r from-gray-900 via-indigo-800 to-purple-800 dark:from-white dark:via-blue-200 dark:to-purple-200 bg-clip-text text-transparent leading-tight"
-              >
+              {/* Name with luxury gradient - moved below profile */}
+              <h1 className="hero-name">
                 {name}
-              </motion.h1>
+              </h1>
 
-              {/* Dynamic role */}
-              <motion.div variants={itemVariants}>
-                <motion.div 
-                  key={currentRole.text}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -20 }}
-                  transition={{ duration: 0.5 }}
-                  className="flex items-center justify-center lg:justify-start gap-3 text-xl sm:text-2xl lg:text-3xl font-bold text-indigo-600 dark:text-indigo-400 min-h-[4rem]"
-                >
+              {/* Dynamic role with enhanced styling */}
+              <div className="hero-role-container">
+                <div className="hero-role-icon-wrapper">
                   {currentRole.icon}
-                  <span>{currentRole.text}</span>
-                </motion.div>
-              </motion.div>
+                </div>
+                <span>{currentRole.text}</span>
+              </div>
 
               {/* Description */}
               <motion.p
                 variants={itemVariants}
-                className="text-base sm:text-lg lg:text-xl text-gray-600 dark:text-gray-300 max-w-2xl leading-relaxed mx-auto lg:mx-0"
+                className="hero-description"
               >
                 {description}
               </motion.p>
 
-              {/* CTA buttons */}
-              <motion.div variants={itemVariants} className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+              {/* CTA buttons with luxury styling */}
+              <motion.div variants={itemVariants} className="hero-cta-container">
                 <motion.button
                   onClick={() => scrollToSection('projects')}
-                  whileHover={{ scale: 1.02, boxShadow: "0 20px 40px rgba(79, 70, 229, 0.3)" }}
+                  whileHover={{ scale: 1.02, boxShadow: "0 20px 40px rgba(245, 158, 11, 0.4)" }}
                   whileTap={{ scale: 0.98 }}
-                  className="group px-8 py-4 bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-bold rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-2"
+                  className="hero-btn-primary"
                 >
-                  <Rocket className="w-4 h-4" />
+                  <Rocket className="hero-btn-primary-icon group-hover:rotate-12" />
                   View Projects
                 </motion.button>
                 <motion.button
                   onClick={() => scrollToSection('contact')}
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
-                  className="px-8 py-4 bg-white/20 dark:bg-white/10 backdrop-blur-md border-2 border-white/30 dark:border-white/20 text-gray-800 dark:text-white font-bold rounded-full hover:bg-white/30 dark:hover:bg-white/20 transition-all duration-300"
+                  className="hero-btn-secondary"
                 >
                   Contact Me
                 </motion.button>
+                {/* Resume Download Button */}
+                <motion.a
+                  href="/resume.pdf" // Add your resume file to public folder
+                  download="Abunesh_RP_Resume.pdf"
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="hero-btn-resume"
+                >
+                  Resume
+                </motion.a>
               </motion.div>
 
-              {/* Social links */}
-              <motion.div variants={itemVariants} className="flex gap-6 justify-center lg:justify-start">
+              {/* Social links with luxury styling */}
+              <motion.div variants={itemVariants} className="hero-social-container">
                 <motion.a
                   href={githubUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   whileHover={{ scale: 1.1, rotate: 5 }}
                   whileTap={{ scale: 0.9 }}
-                  className="p-4 bg-white/20 dark:bg-white/10 backdrop-blur-md rounded-full border border-white/30 dark:border-white/20 hover:bg-white/30 dark:hover:bg-white/20 transition-all duration-300 shadow-lg"
+                  className="hero-social-link"
                   aria-label="Visit GitHub profile"
                 >
-                  <Github className="w-6 h-6 text-gray-700 dark:text-white" />
+                  <Github className="hero-social-icon group-hover:rotate-12" />
                 </motion.a>
                 <motion.a
                   href={linkedinUrl}
@@ -271,36 +320,37 @@ const Hero: React.FC<HeroProps> = ({
                   rel="noopener noreferrer"
                   whileHover={{ scale: 1.1, rotate: -5 }}
                   whileTap={{ scale: 0.9 }}
-                  className="p-4 bg-white/20 dark:bg-white/10 backdrop-blur-md rounded-full border border-white/30 dark:border-white/20 hover:bg-white/30 dark:hover:bg-white/20 transition-all duration-300 shadow-lg"
+                  className="hero-social-link"
                   aria-label="Visit LinkedIn profile"
                 >
-                  <Linkedin className="w-6 h-6 text-blue-600 dark:text-blue-400" />
+                  <Linkedin className="hero-social-icon group-hover:scale-110" />
                 </motion.a>
               </motion.div>
             </div>
 
             {/* Right column - Enhanced floating elements */}
-            <div className="relative hidden lg:block">
-              <div className="relative w-full h-[500px]">
-                {/* Code snippet 1 */}
+            <div className="hero-right-column">
+              <div className="hero-floating-container">
+                {/* Code snippet 1 - Main developer object */}
                 <motion.div
                   variants={floatingVariants}
                   animate="animate"
-                  className="absolute top-16 right-8 p-6 bg-white/10 dark:bg-white/5 backdrop-blur-xl rounded-2xl border border-white/20 dark:border-white/10 shadow-2xl font-mono text-sm max-w-xs"
+                  className="hero-code-card hero-code-card-1"
                 >
-                  <div className="flex items-center gap-2 mb-4">
-                    <div className="w-3 h-3 bg-red-500 rounded-full"></div>
-                    <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
-                    <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-                    <span className="ml-2 text-xs text-gray-500 dark:text-gray-400">developer.js</span>
+                  <div className="hero-code-dots">
+                    <div className="hero-code-dot-red"></div>
+                    <div className="hero-code-dot-yellow"></div>
+                    <div className="hero-code-dot-green"></div>
+                    <span className="hero-code-filename">developer.js</span>
                   </div>
-                  <div className="space-y-1">
-                    <div className="text-blue-400">const</div>
-                    <div className="text-purple-400 ml-2">developer = {`{`}</div>
-                    <div className="text-emerald-400 ml-4">name: '{name.split(' ')[0]}',</div>
-                    <div className="text-amber-400 ml-4">passion: 'Innovation',</div>
-                    <div className="text-cyan-400 ml-4">skills: ['AI', 'ML', 'Web']</div>
-                    <div className="text-purple-400 ml-2">{`}`}</div>
+                  <div className="hero-code-content">
+                    <div className="hero-syntax-keyword">const</div>
+                    <div className="hero-syntax-function ml-2">developer = {`{`}</div>
+                    <div className="hero-syntax-string ml-4">name: '{name.split(' ')[0]}',</div>
+                    <div className="hero-syntax-property ml-4">passion: 'Innovation',</div>
+                    <div className="hero-syntax-value ml-4">skills: ['React', 'AI', 'Data'],</div>
+                    <div className="hero-syntax-emoji ml-4">mission: 'Build Future' ✨</div>
+                    <div className="hero-syntax-function ml-2">{`}`}</div>
                   </div>
                 </motion.div>
 
@@ -309,60 +359,158 @@ const Hero: React.FC<HeroProps> = ({
                   variants={floatingVariants}
                   animate="animate"
                   style={{ animationDelay: '2s' }}
-                  className="absolute bottom-16 left-8 p-6 bg-gray-900/90 backdrop-blur-xl rounded-2xl border border-gray-700 shadow-2xl max-w-sm"
+                  className="hero-terminal-card"
                 >
-                  <div className="flex items-center gap-2 mb-4">
-                    <Terminal className="w-4 h-4 text-green-400" />
-                    <span className="text-sm font-medium text-gray-300">Terminal</span>
+                  <div className="hero-terminal-header">
+                    <Terminal className="w-4 h-4 text-amber-400" />
+                    <span className="hero-terminal-title">Terminal</span>
+                    <div className="hero-terminal-dots">
+                      <div className="hero-code-dot-red"></div>
+                      <div className="hero-code-dot-yellow"></div>
+                      <div className="hero-code-dot-green"></div>
+                    </div>
                   </div>
-                  <div className="font-mono text-sm space-y-2">
-                    <div className="text-gray-400">$ npm run innovation</div>
-                    <div className="text-green-400">✓ Building the future...</div>
-                    <div className="text-blue-400">✓ Compiling dreams...</div>
-                    <div className="text-purple-400">✓ Deploying solutions...</div>
-                    <div className="flex items-center gap-2">
-                      <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-                      <span className="text-green-400">Ready to innovate!</span>
+                  <div className="hero-terminal-content">
+                    <div className="hero-terminal-command">$ npm run innovation</div>
+                    <div className="hero-terminal-success">✓ Building the future...</div>
+                    <div className="hero-terminal-info">✓ Compiling dreams...</div>
+                    <div className="hero-terminal-warning">✓ Deploying solutions...</div>
+                    <div className="hero-terminal-ready">
+                      <div className="hero-terminal-pulse"></div>
+                      <span className="hero-terminal-text">Ready to innovate!</span>
                     </div>
                   </div>
                 </motion.div>
 
-                {/* Floating orb */}
+                {/* Floating geometric shapes */}
                 <motion.div
                   variants={floatingVariants}
                   animate="animate"
                   style={{ animationDelay: '4s' }}
-                  className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-40 h-40"
+                  className="hero-shape-1"
                 >
-                  <div className="w-full h-full bg-gradient-to-br from-indigo-400 via-purple-500 to-pink-500 rounded-full opacity-30 blur-2xl animate-pulse" />
-                  <div className="absolute inset-8 bg-gradient-to-br from-cyan-400 to-blue-500 rounded-full opacity-40 blur-xl animate-pulse" style={{ animationDelay: '1s' }} />
+                  <div className="hero-shape-blur hero-shape-blur-1" />
                 </motion.div>
+
+                <motion.div
+                  variants={floatingVariants}
+                  animate="animate"
+                  style={{ animationDelay: '3s' }}
+                  className="hero-shape-2"
+                >
+                  <div className="hero-shape-blur hero-shape-blur-2" />
+                </motion.div>
+
+                {/* Additional decorative elements */}
+                <div className="hero-deco-square"></div>
+                <div className="hero-deco-circle"></div>
+                <div className="hero-deco-rect"></div>
               </div>
             </div>
           </div>
         </div>
       </motion.div>
 
-      {/* Enhanced scroll indicator */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 3, duration: 1 }}
-        className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
-      >
-        <motion.button
-          onClick={() => window.scrollBy({ top: window.innerHeight, behavior: 'smooth' })}
-          animate={{ y: [0, 8, 0] }}
-          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-          className="flex flex-col items-center gap-2 text-gray-500 dark:text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-300 group"
-          aria-label="Scroll to explore more content"
-        >
-          <span className="text-sm font-medium group-hover:text-indigo-600 dark:group-hover:text-indigo-400">
-            Scroll to explore
-          </span>
-          <ChevronDown className="w-5 h-5 group-hover:scale-110 transition-transform duration-300" />
-        </motion.button>
-      </motion.div>
+      {/* Corner Decorative Elements */}
+      <div className="hero-corner-decorations">
+        {/* Top Left Corner */}
+        <div className="hero-corner-top-left">
+          <motion.div
+            animate={{ rotate: 360 }}
+            transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+            className="hero-corner-shape-1"
+          />
+          <motion.div
+            animate={{ scale: [1, 1.2, 1] }}
+            transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+            className="hero-corner-shape-2"
+          />
+        </div>
+        
+        {/* Top Right Corner */}
+        <div className="hero-corner-top-right">
+          <motion.div
+            animate={{ rotate: -360 }}
+            transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+            className="hero-corner-shape-3"
+          />
+        </div>
+        
+        {/* Bottom Left Corner */}
+        <div className="hero-corner-bottom-left">
+          <motion.div
+            animate={{ y: [-10, 10, -10] }}
+            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+            className="hero-corner-shape-4"
+          />
+        </div>
+        
+        {/* Bottom Right Corner */}
+        <div className="hero-corner-bottom-right">
+          <motion.div
+            animate={{ rotate: 360 }}
+            transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+            className="hero-corner-shape-5"
+          />
+          <motion.div
+            animate={{ scale: [0.8, 1.1, 0.8] }}
+            transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+            className="hero-corner-shape-6"
+          />
+        </div>
+      </div>
+
+      {/* Additional sparkle effects */}
+      <div className="hero-sparkles-container">
+        <motion.div 
+          animate={{ 
+            opacity: [0.2, 0.8, 0.2],
+            scale: [0.8, 1.2, 0.8]
+          }}
+          transition={{ 
+            duration: 3, 
+            repeat: Infinity, 
+            delay: 0.5 
+          }}
+          className="hero-sparkle hero-sparkle-1"
+        />
+        <motion.div 
+          animate={{ 
+            opacity: [0.3, 1, 0.3],
+            scale: [0.5, 1.5, 0.5]
+          }}
+          transition={{ 
+            duration: 2.5, 
+            repeat: Infinity, 
+            delay: 1.5 
+          }}
+          className="hero-sparkle hero-sparkle-2"
+        />
+        <motion.div 
+          animate={{ 
+            opacity: [0.4, 0.9, 0.4],
+            scale: [0.6, 1.3, 0.6]
+          }}
+          transition={{ 
+            duration: 3.5, 
+            repeat: Infinity, 
+            delay: 2.5 
+          }}
+          className="hero-sparkle hero-sparkle-3"
+        />
+        <motion.div 
+          animate={{ 
+            opacity: [0.5, 1, 0.5],
+            scale: [0.7, 1.4, 0.7]
+          }}
+          transition={{ 
+            duration: 4, 
+            repeat: Infinity, 
+            delay: 3.5 
+          }}
+          className="hero-sparkle hero-sparkle-4"
+        />
+      </div>
     </section>
   );
 };
