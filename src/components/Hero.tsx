@@ -358,7 +358,7 @@ const Hero: React.FC<HeroProps> = ({
               <motion.div variants={itemVariants} className="hero-cta-container">
                 <motion.button
                   onClick={() => scrollToSection('projects')}
-                  whileHover={{ scale: 1.02, boxShadow: "0 20px 40px rgba(245, 158, 11, 0.4)" }}
+                  whileHover={{ scale: 1.02, boxShadow: "0 20px 40px rgba(255, 162, 0, 0.4)" }}
                   whileTap={{ scale: 0.98 }}
                   className="hero-btn-primary"
                 >
