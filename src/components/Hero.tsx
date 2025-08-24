@@ -10,7 +10,7 @@ import {
   Terminal,
   Zap
 } from 'lucide-react';
-import profileImg from '../assets/public/profile.png'; // Ensure you have a profile image in assets folder
+import profileImg from '../assets/profile.png';
 
 // Import CSS styles
 import '../styles/components.css';
@@ -375,7 +375,7 @@ const Hero: React.FC<HeroProps> = ({
                 </motion.button>
                 {/* Resume Download Button */}
                 <motion.a
-                  href="../assets/public/resume.pdf" // Add your resume file to public folder
+                  href="/resume.pdf"
                   download="Abunesh_RP_Resume.pdf"
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
