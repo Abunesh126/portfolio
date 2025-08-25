@@ -299,6 +299,17 @@
 }
 
 /* Motion Effects */
+@keyframes bounce {
+  0%, 100% { 
+    transform: translateY(0);
+    animation-timing-function: ease-out;
+  }
+  50% { 
+    transform: translateY(-15px);
+    animation-timing-function: ease-in;
+  }
+}
+
 @keyframes bounce-slow {
   0%, 100% { 
     transform: translateY(0);

@@ -8,7 +8,8 @@ import {
   Brain,
   Rocket,
   Terminal,
-  Zap
+  Zap,
+  Mail
 } from 'lucide-react';
 import profileImg from '../assets/profile.png';
 
@@ -310,6 +311,14 @@ const Hero: React.FC<HeroProps> = ({
                 <div className="hero-profile-container">
                   <motion.div
                     whileHover={{ scale: 1.03 }}
+                    animate={{
+                      scale: [1, 1.02, 1]
+                    }}
+                    transition={{
+                      duration: 4,
+                      repeat: Infinity,
+                      ease: "easeInOut"
+                    }}
                     className="hero-profile-motion-wrapper"
                   >
                     {profileImage ? (
@@ -362,25 +371,26 @@ const Hero: React.FC<HeroProps> = ({
                   whileTap={{ scale: 0.98 }}
                   className="hero-btn-primary"
                 >
-                  <Rocket className="hero-btn-primary-icon group-hover:rotate-12" />
+                  <Rocket className="w-4 h-4" />
                   View Projects
                 </motion.button>
                 <motion.button
                   onClick={() => scrollToSection('contact')}
-                  whileHover={{ scale: 1.02 }}
+                  whileHover={{ scale: 1.02, boxShadow: "0 20px 40px rgba(255, 162, 0, 0.4)" }}
                   whileTap={{ scale: 0.98 }}
-                  className="hero-btn-secondary"
+                  className="hero-btn-primary"
                 >
+                  <Mail className="w-4 h-4" />
                   Contact Me
                 </motion.button>
-                {/* Resume Download Button */}
                 <motion.a
                   href="/resume.pdf"
                   download="Abunesh_RP_Resume.pdf"
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
-                  className="hero-btn-resume"
+                  className="hero-btn-secondary"
                 >
+                  <Terminal className="w-4 h-4" />
                   Resume
                 </motion.a>
               </motion.div>
@@ -391,23 +401,23 @@ const Hero: React.FC<HeroProps> = ({
                   href={githubUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  whileHover={{ scale: 1.1, rotate: 5 }}
+                  whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.9 }}
                   className="hero-social-link"
                   aria-label="Visit GitHub profile"
                 >
-                  <Github className="hero-social-icon group-hover:rotate-12" />
+                  <Github className="w-6 h-6" />
                 </motion.a>
                 <motion.a
                   href={linkedinUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  whileHover={{ scale: 1.1, rotate: -5 }}
+                  whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.9 }}
                   className="hero-social-link"
                   aria-label="Visit LinkedIn profile"
                 >
-                  <Linkedin className="hero-social-icon group-hover:scale-110" />
+                  <Linkedin className="w-6 h-6" />
                 </motion.a>
               </motion.div>
             </div>

@@ -398,13 +398,121 @@ const Skills = () => {
       id="skills"
       className="min-h-screen relative overflow-hidden"
       style={{
-        background: 'linear-gradient(135deg, #111827 0%, #1f2937 50%, #000000 100%)'
+        background: 'transparent',
+        marginTop: '-2rem'
       }}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.4 }}
     >
-      {/* Contact-style background orbs */}
+      {/* Distributed Decorative Elements */}
+      {/* Floating particles with low opacity */}
+      <motion.div 
+        animate={{ 
+          y: [0, -20, 0],
+          x: [0, 10, 0],
+          opacity: [0.1, 0.3, 0.1]
+        }}
+        transition={{ 
+          duration: 8, 
+          repeat: Infinity, 
+          delay: 0
+        }}
+        className="absolute top-[20%] left-[5%] w-2 h-2 rounded-full bg-yellow-400"
+        style={{ opacity: 0.15 }}
+      />
+      <motion.div 
+        animate={{ 
+          y: [0, 15, 0],
+          x: [0, -8, 0],
+          opacity: [0.1, 0.25, 0.1]
+        }}
+        transition={{ 
+          duration: 6, 
+          repeat: Infinity, 
+          delay: 2
+        }}
+        className="absolute top-[60%] right-[8%] w-3 h-3 rounded-full bg-orange-400"
+        style={{ opacity: 0.12 }}
+      />
+      <motion.div 
+        animate={{ 
+          y: [0, -25, 0],
+          opacity: [0.08, 0.2, 0.08],
+          rotate: [0, 180]
+        }}
+        transition={{ 
+          duration: 10, 
+          repeat: Infinity, 
+          delay: 4
+        }}
+        className="absolute bottom-[15%] left-[85%] w-1.5 h-1.5 rounded-full bg-yellow-300"
+        style={{ opacity: 0.1 }}
+      />
+      <motion.div 
+        animate={{ 
+          x: [0, 20, 0],
+          opacity: [0.1, 0.3, 0.1],
+          scale: [0.8, 1.2, 0.8]
+        }}
+        transition={{ 
+          duration: 7, 
+          repeat: Infinity, 
+          delay: 1
+        }}
+        className="absolute top-[80%] left-[15%] w-2.5 h-2.5 rounded-full bg-amber-400"
+        style={{ opacity: 0.13 }}
+      />
+      <motion.div 
+        animate={{ 
+          y: [0, -18, 0],
+          x: [0, -12, 0],
+          opacity: [0.05, 0.18, 0.05]
+        }}
+        transition={{ 
+          duration: 9, 
+          repeat: Infinity, 
+          delay: 3
+        }}
+        className="absolute top-[35%] right-[25%] w-1 h-1 rounded-full bg-yellow-500"
+        style={{ opacity: 0.08 }}
+      />
+
+      {/* Geometric shapes with very low opacity */}
+      <motion.div 
+        animate={{ 
+          rotate: [0, 360],
+          opacity: [0.05, 0.15, 0.05]
+        }}
+        transition={{ 
+          duration: 15, 
+          repeat: Infinity
+        }}
+        className="absolute top-[10%] right-[15%] w-8 h-8 border border-yellow-400"
+        style={{ 
+          opacity: 0.08,
+          transform: 'rotate(45deg)'
+        }}
+      />
+      <motion.div 
+        animate={{ 
+          rotate: [360, 0],
+          scale: [0.8, 1.1, 0.8],
+          opacity: [0.03, 0.12, 0.03]
+        }}
+        transition={{ 
+          duration: 12, 
+          repeat: Infinity,
+          delay: 2
+        }}
+        className="absolute bottom-[25%] left-[10%] w-6 h-6 border border-orange-400"
+        style={{ 
+          opacity: 0.06,
+          borderRadius: '30%'
+        }}
+      />
+
+      {/* Animated background orbs */}
       <motion.div 
         animate={{ 
           x: [0, 40, 0], 
@@ -418,7 +526,7 @@ const Skills = () => {
         }}
         className="absolute top-[15%] left-[10%] w-[280px] h-[280px] rounded-full pointer-events-none z-[1]"
         style={{
-          background: 'linear-gradient(to right, rgba(245, 158, 11, 0.2), rgba(234, 179, 8, 0.2))',
+          background: 'linear-gradient(to right, rgba(245, 158, 11, 0.05), rgba(234, 179, 8, 0.05))',
           mixBlendMode: 'multiply',
           filter: 'blur(3rem)'
         }}
@@ -436,7 +544,7 @@ const Skills = () => {
         }}
         className="absolute bottom-[25%] right-[15%] w-[220px] h-[220px] rounded-full pointer-events-none z-[1]"
         style={{
-          background: 'linear-gradient(to right, rgba(251, 146, 60, 0.2), rgba(245, 158, 11, 0.2))',
+          background: 'linear-gradient(to right, rgba(251, 146, 60, 0.05), rgba(245, 158, 11, 0.05))',
           mixBlendMode: 'multiply',
           filter: 'blur(3rem)'
         }}
@@ -460,14 +568,14 @@ const Skills = () => {
         }}
       />
 
-      {/* Main content container - Contact style */}
+      {/* Main content container */}
       <motion.div 
         className="max-w-7xl mx-auto px-6 py-20 relative z-10"
         initial={{ y: 50, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.4, delay: 0.1 }}
       >
-        {/* Header Section - Contact style */}
+        {/* Header Section */}
         <motion.div 
           className="text-center mb-16"
           initial={{ y: 30, opacity: 0 }}
@@ -1177,7 +1285,7 @@ const Skills = () => {
         )}
       </AnimatePresence>
 
-      {/* Enhanced sparkle effects - Contact style */}
+      {/* Enhanced sparkle effects */}
       <div className="absolute inset-0 pointer-events-none">
         <motion.div 
           animate={{ 

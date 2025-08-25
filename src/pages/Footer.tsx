@@ -36,7 +36,8 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="footer-luxury-section">
+    <footer className="footer-section"
+    >
       {/* Enhanced luxury background */}
       <div className="footer-bg-container">
         <div className="footer-bg-primary" />
@@ -92,7 +93,14 @@ const Footer = () => {
             transition={{ duration: 0.3, delay: 0.2 }}
           >
             <motion.h3 
-              className="text-2xl font-bold bg-gradient-to-r from-amber-400 to-yellow-600 bg-clip-text text-transparent"
+              className="text-2xl font-bold"
+              style={{
+                background: 'linear-gradient(135deg, #fbbf24, #fcd34d, #fde047)',
+                WebkitBackgroundClip: 'text',
+                backgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                color: 'transparent'
+              }}
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ duration: 0.3, delay: 0.25 }}
@@ -116,7 +124,7 @@ const Footer = () => {
             animate={{ x: 0, opacity: 1 }}
             transition={{ duration: 0.3, delay: 0.2 }}
           >
-            <h4 className="text-lg font-semibold mb-4 text-amber-400">Connect With Me</h4>
+            <h4 className="text-lg font-semibold mb-4" style={{ color: '#f59e0b' }}>Connect With Me</h4>
             <div className="flex justify-end space-x-4">
               {socialLinks.map((social, index) => (
                 <motion.a

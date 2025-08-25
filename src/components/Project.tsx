@@ -114,6 +114,112 @@ const Projects = () => {
       animate={{ opacity: 1 }}
       transition={{ duration: 0.2 }}
     >
+      {/* Distributed decorative particles */}
+      <motion.div 
+        animate={{ 
+          y: [0, -22, 0],
+          x: [0, 8, 0],
+          opacity: [0.08, 0.25, 0.08]
+        }}
+        transition={{ 
+          duration: 7, 
+          repeat: Infinity, 
+          delay: 0.5
+        }}
+        className="absolute top-[12%] left-[8%] w-2 h-2 rounded-full bg-amber-400"
+        style={{ opacity: 0.12 }}
+      />
+      <motion.div 
+        animate={{ 
+          y: [0, 18, 0],
+          x: [0, -15, 0],
+          opacity: [0.1, 0.28, 0.1],
+          rotate: [0, 90]
+        }}
+        transition={{ 
+          duration: 9, 
+          repeat: Infinity, 
+          delay: 2
+        }}
+        className="absolute top-[70%] right-[12%] w-3 h-3 rounded-full bg-yellow-400"
+        style={{ opacity: 0.15 }}
+      />
+      <motion.div 
+        animate={{ 
+          x: [0, 25, 0],
+          opacity: [0.06, 0.2, 0.06],
+          scale: [0.7, 1.3, 0.7]
+        }}
+        transition={{ 
+          duration: 11, 
+          repeat: Infinity, 
+          delay: 4
+        }}
+        className="absolute bottom-[20%] left-[90%] w-1.5 h-1.5 rounded-full bg-orange-400"
+        style={{ opacity: 0.1 }}
+      />
+      <motion.div 
+        animate={{ 
+          y: [0, -16, 0],
+          opacity: [0.08, 0.22, 0.08]
+        }}
+        transition={{ 
+          duration: 6, 
+          repeat: Infinity, 
+          delay: 1.5
+        }}
+        className="absolute top-[45%] left-[5%] w-2.5 h-2.5 rounded-full bg-yellow-300"
+        style={{ opacity: 0.11 }}
+      />
+      <motion.div 
+        animate={{ 
+          x: [0, -12, 0],
+          y: [0, 20, 0],
+          opacity: [0.05, 0.18, 0.05]
+        }}
+        transition={{ 
+          duration: 8, 
+          repeat: Infinity, 
+          delay: 3.5
+        }}
+        className="absolute bottom-[8%] right-[30%] w-1 h-1 rounded-full bg-amber-500"
+        style={{ opacity: 0.09 }}
+      />
+
+      {/* Geometric decorative shapes */}
+      <motion.div 
+        animate={{ 
+          rotate: [0, -360],
+          opacity: [0.04, 0.12, 0.04]
+        }}
+        transition={{ 
+          duration: 18, 
+          repeat: Infinity
+        }}
+        className="absolute top-[25%] right-[8%] w-6 h-6 border border-yellow-400"
+        style={{ 
+          opacity: 0.07,
+          transform: 'rotate(45deg)'
+        }}
+      />
+      <motion.div 
+        animate={{ 
+          rotate: [360, 0],
+          scale: [0.9, 1.2, 0.9],
+          opacity: [0.03, 0.15, 0.03]
+        }}
+        transition={{ 
+          duration: 14, 
+          repeat: Infinity,
+          delay: 3
+        }}
+        className="absolute bottom-[40%] left-[15%] w-5 h-5 border border-orange-400"
+        style={{ 
+          opacity: 0.06,
+          borderRadius: '25%'
+        }}
+      />
+
       {/* Hero-style background orbs */}
       <motion.div 
         animate={{ 
@@ -314,19 +420,6 @@ const Projects = () => {
                   <FiGithub className="group-hover:rotate-12 transition-transform duration-300" />
                   Code
                 </motion.a>
-                {project.liveUrl && (
-                  <motion.a
-                    href={project.liveUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="project-link primary group"
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    <FiExternalLink className="group-hover:scale-110 transition-transform duration-300" />
-                    Live Demo
-                  </motion.a>
-                )}
               </motion.div>
 
               {/* Hover Effect Overlay */}
