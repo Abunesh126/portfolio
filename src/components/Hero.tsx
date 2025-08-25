@@ -11,7 +11,8 @@ import {
   Zap,
   Mail
 } from 'lucide-react';
-import profileImg from '../assets/profile.png';
+import profileImg from '../assets/profile/profile.png';
+
 
 // Import CSS styles
 import '../styles/components.css';
