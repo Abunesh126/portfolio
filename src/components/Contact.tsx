@@ -127,18 +127,28 @@ const Contact: React.FC = () => {
     setStatus({ type: "loading", message: "Sending your message..." });
 
     try {
-      // Simulate API call - replace with your actual endpoint
-      const response = await fetch('/api/contact', {
+      // Prepare data for backend API
+      const formDataForAPI = {
+        name: formData.name,
+        email: formData.email,
+        message: formData.message,
+        phone_no: formData.phone,
+        api_key: "78c4be0c6c8779406b83ded5172480a3"
+      };
+
+      // Send to backend API
+      const response = await fetch('http://localhost:3001/v1/contact-mail', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(formDataForAPI),
       });
 
-      // Fallback simulation if no API
-      if (!response.ok && response.status === 404) {
-        await new Promise(resolve => setTimeout(resolve, 2000));
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.error || 'Failed to send message');
       }
       
       setStatus({
@@ -159,10 +169,11 @@ const Contact: React.FC = () => {
         setStatus({ type: "", message: "" });
       }, 8000);
       
-    } catch {
+    } catch (error) {
+      console.error('Error sending message:', error);
       setStatus({
         type: "error",
-        message: "Failed to send message. Please try again or contact me directly via email."
+        message: error instanceof Error ? error.message : "Failed to send message. Please try again or contact me directly via email."
       });
     } finally {
       setLoading(false);

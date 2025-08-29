@@ -81,7 +81,7 @@ const Projects = () => {
       id: 3,
       title: "RiderX",
       description: "AI-powered rider safety system for KTM bikes that uses a dashcam and computer vision to detect incorrect posture in real time and alert the rider instantly",
-      technologies: ["JavaScript", "TypeScript", "React", "Node.js"],
+      technologies: ["Teachable Machine","JavaScript", "TypeScript", "React", "Node.js"],
       githubUrl: "https://github.com/Abunesh126/RiderX",
       liveUrl: "https://riderx-demo.vercel.app",
       image: riderxImg

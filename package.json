@@ -9,7 +9,12 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "mobile": "vite preview --host 0.0.0.0 --port 3000"
+    "mobile": "vite preview --host 0.0.0.0 --port 3000",
+    "backend:install": "npm install express nodemailer cors multer express-rate-limit nodemon",
+    "backend:dev": "node server.js",
+    "backend:start": "node server.js",
+    "fullstack:dev": "concurrently \"npm run dev\" \"npm run backend:dev\"",
+    "fullstack:mobile": "concurrently \"npm run mobile\" \"npm run backend:dev\""
   },
   "dependencies": {
     "framer-motion": "^12.23.12",
@@ -24,6 +29,7 @@
     "@types/react-dom": "^19.1.7",
     "@vitejs/plugin-react": "^4.3.4",
     "autoprefixer": "^10.4.21",
+    "concurrently": "^7.6.0",
     "eslint": "^9.21.0",
     "eslint-plugin-react-hooks": "^5.1.0",
     "eslint-plugin-react-refresh": "^0.4.19",

@@ -1,6 +1,7 @@
 @echo off
 echo =============================================
 echo   Mobile Portfolio Hosting Setup
+echo   (Frontend + Backend)
 echo =============================================
 echo.
 
@@ -12,14 +13,16 @@ echo Building portfolio for production...
 call npm run build
 
 echo.
-echo Starting local server for mobile testing...
+echo Starting full-stack application...
 echo.
 echo Your portfolio is available at:
-echo - Local: http://localhost:3000
-echo - Mobile: http://%ip%:3000
+echo - Frontend Local: http://localhost:3000
+echo - Frontend Mobile: http://%ip%:3000
+echo - Backend API: http://%ip%:3001
 echo.
+echo Contact form is fully functional with email backend!
 echo Make sure your mobile device is on the same WiFi network!
-echo Press Ctrl+C to stop the server
+echo Press Ctrl+C to stop the servers
 echo.
 
-call npm run preview -- --host 0.0.0.0 --port 3000
+call npm run fullstack:mobile
