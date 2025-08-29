@@ -563,4 +563,7 @@ ifconfig | grep "inet "
 # 🎉 License
 
 "# portfolio" 
+<<<<<<< HEAD
 "# newportfolio" 
+=======
+>>>>>>> d1c39a396db539739af1d97023e4cb6971484304
