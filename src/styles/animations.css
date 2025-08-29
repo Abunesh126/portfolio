@@ -1,0 +1,694 @@
+/* ===========================================
+   ANIMATION LIBRARY - Dark & Gold Luxury Portfolio
+   ========================================== */
+
+/* Accessibility - Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  
+  .hero-particle,
+  .global-shape,
+  .global-sparkle,
+  .flowing-particles,
+  .cross-element,
+  .projects-bg-orb,
+  .footer-bg-orb {
+    animation: none !important;
+    transform: none !important;
+  }
+  
+  .hero-profile-motion-wrapper,
+  .hero-floating-container > *,
+  .hero-sparkles-container > * {
+    animation: none !important;
+  }
+}
+
+/* Core Luxury Animations */
+@keyframes luxuryFloat {
+  0%, 100% { 
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% { 
+    transform: translateY(-20px) rotate(2deg);
+  }
+}
+
+@keyframes luxuryFloat1 {
+  0%, 100% { 
+    transform: translateY(0px) rotate(0deg) scale(1);
+  }
+  33% { 
+    transform: translateY(-15px) rotate(3deg) scale(1.02);
+  }
+  66% { 
+    transform: translateY(-8px) rotate(-2deg) scale(0.98);
+  }
+}
+
+@keyframes luxuryFloat2 {
+  0%, 100% { 
+    transform: translateY(0px) translateX(0px) rotate(0deg);
+  }
+  25% { 
+    transform: translateY(-12px) translateX(8px) rotate(1deg);
+  }
+  50% { 
+    transform: translateY(-25px) translateX(0px) rotate(0deg);
+  }
+  75% { 
+    transform: translateY(-12px) translateX(-8px) rotate(-1deg);
+  }
+}
+
+@keyframes luxuryFloat3 {
+  0%, 100% { 
+    transform: translateY(0px) scale(1) rotate(0deg);
+  }
+  20% { 
+    transform: translateY(-8px) scale(1.03) rotate(1deg);
+  }
+  40% { 
+    transform: translateY(-18px) scale(1.05) rotate(-1deg);
+  }
+  60% { 
+    transform: translateY(-22px) scale(1.02) rotate(2deg);
+  }
+  80% { 
+    transform: translateY(-10px) scale(1.01) rotate(-1deg);
+  }
+}
+
+@keyframes luxuryFloat4 {
+  0%, 100% { 
+    transform: translateY(0px) translateX(0px) rotate(0deg) scale(1);
+  }
+  16% { 
+    transform: translateY(-5px) translateX(3px) rotate(1deg) scale(1.01);
+  }
+  33% { 
+    transform: translateY(-12px) translateX(6px) rotate(-1deg) scale(1.03);
+  }
+  50% { 
+    transform: translateY(-18px) translateX(0px) rotate(2deg) scale(1.02);
+  }
+  66% { 
+    transform: translateY(-14px) translateX(-4px) rotate(-2deg) scale(1.01);
+  }
+  83% { 
+    transform: translateY(-6px) translateX(-2px) rotate(1deg) scale(1.01);
+  }
+}
+
+@keyframes luxuryGlow {
+  0%, 100% { 
+    opacity: 0.6;
+    transform: scale(1);
+    filter: blur(0px);
+  }
+  50% { 
+    opacity: 1;
+    transform: scale(1.1);
+    filter: blur(1px);
+  }
+}
+
+/* Hero Specific Animations */
+@keyframes heroFloating {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  33% {
+    transform: translateY(-8px) rotate(1deg);
+  }
+  66% {
+    transform: translateY(-15px) rotate(-1deg);
+  }
+}
+
+@keyframes heroFloatingDelayed {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-12px) rotate(2deg);
+  }
+}
+
+@keyframes heroParticleFloat1 {
+  0%, 100% {
+    transform: translateY(0px);
+    opacity: 0.4;
+  }
+  50% {
+    transform: translateY(-20px);
+    opacity: 0.8;
+  }
+}
+
+@keyframes heroParticleFloat2 {
+  0%, 100% {
+    transform: translateY(0px) translateX(0px);
+    opacity: 0.3;
+  }
+  50% {
+    transform: translateY(-15px) translateX(10px);
+    opacity: 0.7;
+  }
+}
+
+@keyframes heroParticleFloat3 {
+  0%, 100% {
+    transform: translateY(0px);
+    opacity: 0.5;
+  }
+  50% {
+    transform: translateY(-25px);
+    opacity: 1;
+  }
+}
+
+@keyframes heroParticleFloat4 {
+  0%, 100% {
+    transform: translateY(0px) translateX(0px);
+    opacity: 0.4;
+  }
+  50% {
+    transform: translateY(-18px) translateX(-8px);
+    opacity: 0.9;
+  }
+}
+
+@keyframes heroSparkle1 {
+  0%, 100% {
+    opacity: 0.2;
+    transform: scale(0.8);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.2);
+  }
+}
+
+@keyframes heroSparkle2 {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(0.5);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.5);
+  }
+}
+
+@keyframes heroSparkle3 {
+  0%, 100% {
+    opacity: 0.4;
+    transform: scale(0.6);
+  }
+  50% {
+    opacity: 0.9;
+    transform: scale(1.3);
+  }
+}
+
+@keyframes heroSparkle4 {
+  0%, 100% {
+    opacity: 0.5;
+    transform: scale(0.7);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.4);
+  }
+}
+
+@keyframes heroScrollIndicator {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(8px);
+  }
+}
+
+/* Pulse Effects for Hero */
+@keyframes heroPulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 1;
+  }
+}
+
+/* Shine Effects */
+@keyframes shine {
+  0% { 
+    background-position: -200% 0;
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% { 
+    background-position: 200% 0;
+    opacity: 0;
+  }
+}
+
+@keyframes goldShine {
+  0% { 
+    transform: translateX(-100%) rotate(-45deg);
+    opacity: 0;
+  }
+  50% { 
+    opacity: 1;
+  }
+  100% { 
+    transform: translateX(300%) rotate(-45deg);
+    opacity: 0;
+  }
+}
+
+@keyframes luxuryShine {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+/* Crown and Royal Effects */
+@keyframes crown-float {
+  0%, 100% { 
+    transform: translateY(0px) rotate(0deg) scale(1);
+  }
+  25% { 
+    transform: translateY(-8px) rotate(5deg) scale(1.1);
+  }
+  50% { 
+    transform: translateY(-15px) rotate(0deg) scale(1.05);
+  }
+  75% { 
+    transform: translateY(-8px) rotate(-5deg) scale(1.1);
+  }
+}
+
+@keyframes sparkle {
+  0%, 100% { 
+    opacity: 0;
+    transform: scale(0) rotate(0deg);
+  }
+  50% { 
+    opacity: 1;
+    transform: scale(1) rotate(180deg);
+  }
+}
+
+@keyframes twinkle {
+  0%, 100% { 
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  50% { 
+    opacity: 1;
+    transform: scale(1.2);
+  }
+}
+
+/* Motion Effects */
+@keyframes bounce {
+  0%, 100% { 
+    transform: translateY(0);
+    animation-timing-function: ease-out;
+  }
+  50% { 
+    transform: translateY(-15px);
+    animation-timing-function: ease-in;
+  }
+}
+
+@keyframes bounce-slow {
+  0%, 100% { 
+    transform: translateY(0);
+    animation-timing-function: ease-out;
+  }
+  50% { 
+    transform: translateY(-25px);
+    animation-timing-function: ease-in;
+  }
+}
+
+@keyframes bounce-gentle {
+  0%, 100% { 
+    transform: translateY(0);
+  }
+  50% { 
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes spin-slow {
+  0% { 
+    transform: rotate(0deg);
+  }
+  100% { 
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes pulse-gold {
+  0%, 100% { 
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% { 
+    opacity: 0.7;
+    transform: scale(1.05);
+  }
+}
+
+/* Entrance Animations */
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  0% {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scaleIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes zoomIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Particle Effects */
+@keyframes particle-float-1 {
+  0%, 100% { 
+    transform: translateY(0px) translateX(0px) rotate(0deg);
+  }
+  33% { 
+    transform: translateY(-20px) translateX(10px) rotate(120deg);
+  }
+  66% { 
+    transform: translateY(-40px) translateX(-5px) rotate(240deg);
+  }
+}
+
+@keyframes particle-float-2 {
+  0%, 100% { 
+    transform: translateY(0px) translateX(0px) rotate(0deg);
+  }
+  50% { 
+    transform: translateY(-30px) translateX(15px) rotate(180deg);
+  }
+}
+
+@keyframes particle-drift {
+  0% { 
+    transform: translateY(0px) translateX(0px);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% { 
+    transform: translateY(-100vh) translateX(50px);
+    opacity: 0;
+  }
+}
+
+/* ===========================================
+   HERO ANIMATION UTILITY CLASSES
+   ========================================== */
+
+/* Hero Floating Animations */
+.animate-hero-floating {
+  animation: heroFloating 8s ease-in-out infinite;
+}
+
+.animate-hero-floating-delayed {
+  animation: heroFloatingDelayed 6s ease-in-out infinite;
+  animation-delay: 2s;
+}
+
+/* Hero Particle Animations */
+.animate-hero-particle-1 {
+  animation: heroParticleFloat1 4s ease-in-out infinite;
+}
+
+.animate-hero-particle-2 {
+  animation: heroParticleFloat2 5s ease-in-out infinite;
+  animation-delay: 1s;
+}
+
+.animate-hero-particle-3 {
+  animation: heroParticleFloat3 3.5s ease-in-out infinite;
+  animation-delay: 2s;
+}
+
+.animate-hero-particle-4 {
+  animation: heroParticleFloat4 4.5s ease-in-out infinite;
+  animation-delay: 3s;
+}
+
+/* Hero Sparkle Animations */
+.animate-hero-sparkle-1 {
+  animation: heroSparkle1 3s ease-in-out infinite;
+  animation-delay: 0.5s;
+}
+
+.animate-hero-sparkle-2 {
+  animation: heroSparkle2 2.5s ease-in-out infinite;
+  animation-delay: 1.5s;
+}
+
+.animate-hero-sparkle-3 {
+  animation: heroSparkle3 3.5s ease-in-out infinite;
+  animation-delay: 2.5s;
+}
+
+.animate-hero-sparkle-4 {
+  animation: heroSparkle4 4s ease-in-out infinite;
+  animation-delay: 3.5s;
+}
+
+/* Hero Pulse Animations */
+.animate-hero-pulse {
+  animation: heroPulse 4s ease-in-out infinite;
+}
+
+.animate-hero-pulse-delayed {
+  animation: heroPulse 4s ease-in-out infinite;
+  animation-delay: 2s;
+}
+
+.animate-hero-pulse-slow {
+  animation: heroPulse 6s ease-in-out infinite;
+  animation-delay: 4s;
+}
+
+/* Hero Scroll Indicator */
+.animate-hero-scroll {
+  animation: heroScrollIndicator 2s ease-in-out infinite;
+}
+
+/* Framer Motion Compatible Classes */
+.motion-hero-floating {
+  animation: heroFloating 8s ease-in-out infinite;
+}
+
+.motion-hero-pulse {
+  animation: heroPulse 4s ease-in-out infinite;
+}
+
+/* Hover Animations */
+@keyframes hover-lift {
+  0% { 
+    transform: translateY(0px);
+  }
+  100% { 
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes hover-glow {
+  0% { 
+    box-shadow: 0 0 5px var(--shadow-gold);
+  }
+  100% { 
+    box-shadow: 0 0 20px var(--shadow-gold), 0 0 30px var(--shadow-gold);
+  }
+}
+
+@keyframes hover-scale {
+  0% { 
+    transform: scale(1);
+  }
+  100% { 
+    transform: scale(1.05);
+  }
+}
+
+/* Animation Classes */
+.animate-luxuryFloat { animation: luxuryFloat 6s ease-in-out infinite; }
+.animate-luxuryFloat1 { animation: luxuryFloat1 8s ease-in-out infinite; }
+.animate-luxuryFloat2 { animation: luxuryFloat2 10s ease-in-out infinite; }
+.animate-luxuryFloat3 { animation: luxuryFloat3 12s ease-in-out infinite; }
+.animate-luxuryFloat4 { animation: luxuryFloat4 14s ease-in-out infinite; }
+.animate-luxuryGlow { animation: luxuryGlow 4s ease-in-out infinite; }
+.animate-shine { animation: shine 2s ease-in-out infinite; }
+.animate-goldShine { animation: goldShine 3s ease-in-out infinite; }
+.animate-luxuryShine { 
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+  background-size: 200% 100%;
+  animation: luxuryShine 2s ease-in-out infinite;
+}
+.animate-crown-float { animation: crown-float 4s ease-in-out infinite; }
+.animate-sparkle { animation: sparkle 1.5s ease-in-out infinite; }
+.animate-twinkle { animation: twinkle 2s ease-in-out infinite; }
+.animate-bounce-slow { animation: bounce-slow 3s ease-in-out infinite; }
+.animate-bounce-gentle { animation: bounce-gentle 2s ease-in-out infinite; }
+.animate-spin-slow { animation: spin-slow 20s linear infinite; }
+.animate-pulse-gold { animation: pulse-gold 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
+
+/* Entrance Animation Classes */
+.animate-fadeInUp { animation: fadeInUp 0.6s ease-out forwards; }
+.animate-fadeInDown { animation: fadeInDown 0.6s ease-out forwards; }
+.animate-slideInLeft { animation: slideInLeft 0.8s ease-out forwards; }
+.animate-slideInRight { animation: slideInRight 0.8s ease-out forwards; }
+.animate-scaleIn { animation: scaleIn 0.5s ease-out forwards; }
+.animate-zoomIn { animation: zoomIn 0.6s ease-out forwards; }
+
+/* Particle Animation Classes */
+.animate-particle-float-1 { animation: particle-float-1 8s ease-in-out infinite; }
+.animate-particle-float-2 { animation: particle-float-2 6s ease-in-out infinite; }
+.animate-particle-drift { animation: particle-drift 4s ease-out infinite; }
+
+/* Complex Hover Effects */
+.hover-lift:hover { animation: hover-lift 0.3s ease-out forwards; }
+.hover-glow:hover { animation: hover-glow 0.3s ease-out forwards; }
+.hover-scale:hover { animation: hover-scale 0.3s ease-out forwards; }
+
+/* Staggered Animation Delays */
+.stagger-1 { animation-delay: 0.1s; }
+.stagger-2 { animation-delay: 0.2s; }
+.stagger-3 { animation-delay: 0.3s; }
+.stagger-4 { animation-delay: 0.4s; }
+.stagger-5 { animation-delay: 0.5s; }
+.stagger-6 { animation-delay: 0.6s; }
+.stagger-7 { animation-delay: 0.7s; }
+.stagger-8 { animation-delay: 0.8s; }
+
+/* Performance Optimizations */
+.animate-luxuryFloat,
+.animate-luxuryFloat1,
+.animate-luxuryFloat2,
+.animate-luxuryFloat3,
+.animate-luxuryFloat4,
+.animate-luxuryGlow,
+.animate-shine,
+.animate-crown-float,
+.animate-sparkle,
+.animate-bounce-slow,
+.animate-spin-slow {
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  .animate-luxuryFloat,
+  .animate-luxuryFloat1,
+  .animate-luxuryFloat2,
+  .animate-luxuryFloat3,
+  .animate-luxuryFloat4,
+  .animate-luxuryGlow,
+  .animate-shine,
+  .animate-crown-float,
+  .animate-sparkle,
+  .animate-bounce-slow,
+  .animate-spin-slow,
+  .animate-particle-float-1,
+  .animate-particle-float-2,
+  .animate-particle-drift {
+    animation: none;
+  }
+  
+  .hover-lift:hover,
+  .hover-glow:hover,
+  .hover-scale:hover {
+    animation: none;
+    transform: none;
+  }
+}
