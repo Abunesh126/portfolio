@@ -29,16 +29,16 @@ app.use('/v1/contact-mail', limiter);
 const upload = multer();
 
 // Email configuration
-const transporter = nodemailer.createTransport({
-  service: 'gmail', // or your email service
+const transporter = nodemailer.createTransporter({
+  service: 'gmail',
   auth: {
-    user: process.env.EMAIL_USER || 'abunesh2006@gmail.com',
-    pass: process.env.EMAIL_PASS || 'your-app-password'
+    user: 'abunesh2006@gmail.com',
+    pass: 'gjhw txxx tkfp nkmq'
   }
 });
 
 // API Key validation
-const VALID_API_KEY = process.env.API_KEY || '78c4be0c6c8779406b83ded5172480a3';
+const VALID_API_KEY = '78c4be0c6c8779406b83ded5172480a3';
 
 // Contact form endpoint
 app.post('/v1/contact-mail', upload.none(), async (req, res) => {
