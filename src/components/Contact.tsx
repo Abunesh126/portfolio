@@ -131,9 +131,11 @@ const Contact: React.FC = () => {
     }
   };
 
-  // Constants for HloMail API
-  const API_KEY = "78c4be0c6c8779406b83ded5172480a3";
+  // API configuration - use environment variables in production
+  const API_KEY =
+    import.meta.env.VITE_HLOMAIL_API_KEY || "78c4be0c6c8779406b83ded5172480a3";
   const HLOMAIL_ENDPOINT =
+    import.meta.env.VITE_HLOMAIL_ENDPOINT ||
     "https://hlomail-backend.onrender.com/v1/contact-mail";
 
   // Reset form function
@@ -257,7 +259,7 @@ const Contact: React.FC = () => {
           opacity: [0.1, 0.3, 0.1],
         }}
         transition={{
-          duration: 9,
+          duration: 3,
           repeat: Infinity,
           delay: 0,
         }}
@@ -272,9 +274,9 @@ const Contact: React.FC = () => {
           scale: [0.8, 1.2, 0.8],
         }}
         transition={{
-          duration: 7,
+          duration: 2.5,
           repeat: Infinity,
-          delay: 2.5,
+          delay: 1,
         }}
         className="absolute top-[65%] right-[10%] w-3 h-3 rounded-full bg-orange-400"
         style={{ opacity: 0.12 }}
@@ -286,9 +288,9 @@ const Contact: React.FC = () => {
           rotate: [0, 180],
         }}
         transition={{
-          duration: 12,
+          duration: 4,
           repeat: Infinity,
-          delay: 4,
+          delay: 1.5,
         }}
         className="absolute bottom-[18%] left-[88%] w-1.5 h-1.5 rounded-full bg-amber-400"
         style={{ opacity: 0.1 }}
@@ -299,9 +301,9 @@ const Contact: React.FC = () => {
           opacity: [0.09, 0.26, 0.09],
         }}
         transition={{
-          duration: 8,
+          duration: 3,
           repeat: Infinity,
-          delay: 1,
+          delay: 0.5,
         }}
         className="absolute top-[85%] left-[20%] w-2.5 h-2.5 rounded-full bg-yellow-300"
         style={{ opacity: 0.13 }}
@@ -313,9 +315,9 @@ const Contact: React.FC = () => {
           opacity: [0.05, 0.19, 0.05],
         }}
         transition={{
-          duration: 10,
+          duration: 3.5,
           repeat: Infinity,
-          delay: 3,
+          delay: 1,
         }}
         className="absolute top-[40%] right-[25%] w-1 h-1 rounded-full bg-yellow-500"
         style={{ opacity: 0.08 }}
@@ -329,7 +331,7 @@ const Contact: React.FC = () => {
           scale: [0.9, 1.1, 0.9],
         }}
         transition={{
-          duration: 16,
+          duration: 4.5,
           repeat: Infinity,
         }}
         className="absolute top-[20%] right-[12%] w-7 h-7 border border-yellow-400"
@@ -344,9 +346,9 @@ const Contact: React.FC = () => {
           opacity: [0.04, 0.14, 0.04],
         }}
         transition={{
-          duration: 13,
+          duration: 4,
           repeat: Infinity,
-          delay: 2.5,
+          delay: 1,
         }}
         className="absolute bottom-[30%] left-[8%] w-5 h-5 border border-orange-400"
         style={{
@@ -415,9 +417,9 @@ const Contact: React.FC = () => {
               opacity: [0.2, 0.8, 0.2],
             }}
             transition={{
-              duration: 3 + Math.random() * 2,
+              duration: 1.5 + Math.random() * 1,
               repeat: Infinity,
-              delay: Math.random() * 2,
+              delay: Math.random() * 1,
             }}
           />
         ))}
@@ -429,13 +431,13 @@ const Contact: React.FC = () => {
           className="contact-header"
           initial={{ y: 50, opacity: 0 }}
           animate={isVisible ? { y: 0, opacity: 1 } : {}}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.4 }}
         >
           <motion.h2
             className="contact-title"
             initial={{ scale: 0.9 }}
             animate={isVisible ? { scale: 1 } : {}}
-            transition={{ duration: 0.8, delay: 0.2 }}
+            transition={{ duration: 0.4, delay: 0.1 }}
           >
             Get in Touch
           </motion.h2>
@@ -443,7 +445,7 @@ const Contact: React.FC = () => {
             className="contact-subtitle"
             initial={{ y: 20, opacity: 0 }}
             animate={isVisible ? { y: 0, opacity: 1 } : {}}
-            transition={{ duration: 0.8, delay: 0.4 }}
+            transition={{ duration: 0.4, delay: 0.2 }}
           >
             Ready to transform your ideas into reality? <br />
             Let's discuss your project and build something extraordinary
@@ -457,7 +459,7 @@ const Contact: React.FC = () => {
             className="contact-info-section"
             initial={{ x: -50, opacity: 0 }}
             animate={isVisible ? { x: 0, opacity: 1 } : {}}
-            transition={{ duration: 0.8, delay: 0.6 }}
+            transition={{ duration: 0.4, delay: 0.3 }}
           >
             <div>
               <h3 className="contact-info-title">
@@ -473,7 +475,7 @@ const Contact: React.FC = () => {
                     whileHover={{ y: -5, scale: 1.02 }}
                     initial={{ y: 20, opacity: 0 }}
                     animate={isVisible ? { y: 0, opacity: 1 } : {}}
-                    transition={{ duration: 0.5, delay: 0.8 + index * 0.1 }}
+                    transition={{ duration: 0.3, delay: 0.4 + index * 0.05 }}
                   >
                     <div className="contact-method-icon">{method.icon}</div>
                     <div className="contact-method-info">
@@ -499,7 +501,7 @@ const Contact: React.FC = () => {
             className="contact-form-section"
             initial={{ x: 50, opacity: 0 }}
             animate={isVisible ? { x: 0, opacity: 1 } : {}}
-            transition={{ duration: 0.8, delay: 0.8 }}
+            transition={{ duration: 0.4, delay: 0.4 }}
           >
             <div className="contact-form">
               <form ref={formRef} onSubmit={handleSubmit} className="form-grid">

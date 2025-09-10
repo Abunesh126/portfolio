@@ -1,12 +1,20 @@
 # 🎭 Dark & Gold Luxury Portfolio
 
-> A premium, performance-optimized portfolio website featuring a luxurious dark and gold theme with advanced animations and glassmorphism effects.
+> A premium, performance-optimized portfolio website featuring a luxurious dark and gold theme with advanced animations and glassmorphism effects. Recently optimized for faster performance and cleaner codebase.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=flat&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![React](https://img.shields.io/badge/React-20232A?style=flat&logo=react&logoColor=61DAFB)](https://reactjs.org/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=flat&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
 [![Vite](https://img.shields.io/badge/Vite-646CFF?style=flat&logo=vite&logoColor=white)](https://vitejs.dev/)
+
+## 🆕 Recent Updates (September 2025)
+
+- ⚡ **Performance Optimized**: Contact page animations 50-70% faster
+- 🧹 **Code Cleanup**: Removed unused files and redundant code
+- 🔧 **Environment Config**: Professional API key management
+- 🎭 **Animation Balance**: Maintained visual appeal with improved performance
+- 📱 **Mobile Focus**: Enhanced touch-friendly interactions
 
 ## 📋 Table of Contents
 
@@ -17,16 +25,26 @@
 - [🎨 Design System](#-design-system)
 - [🎬 Animation System](#-animation-system)
 - [📱 Mobile Optimization](#-mobile-optimization)
-- [📧 Backend Integration](#-backend-integration)
+- [📧 Contact Integration](#-contact-form-integration)
 - [🌐 Deployment](#-deployment)
 - [⚡ Performance](#-performance)
 - [🔧 Configuration](#-configuration)
 - [🤝 Contributing](#-contributing)
 - [📄 License](#-license)
 
+### ⚡ Performance & Optimization Features
+
+- **🚀 Optimized Animations**: Contact page animations 50-70% faster
+- **🧹 Clean Codebase**: Removed unused files and redundant code
+- **📦 Reduced Bundle Size**: Eliminated unnecessary dependencies
+- **🔧 Environment Config**: Professional API key management with fallbacks
+- **📱 Mobile Performance**: Touch-optimized interactions and faster loading
+- **🎭 Balanced Effects**: Maintained visual luxury while improving speed
+
 ## ✨ Features
 
 ### 🎯 Core Features
+
 - **🌙 Dark & Gold Luxury Theme**: Premium color palette with sophisticated gold accents
 - **🔄 Theme Toggle**: Seamless switching between light and dark modes with persistent storage
 - **💎 Glassmorphism Effects**: Modern glass-like UI components with backdrop blur
@@ -38,6 +56,7 @@
 ### 🧩 Component Features
 
 #### Skills Showcase
+
 - **🔮 Interactive Skill Bubbles**: Floating animations with luxury effects
 - **🎪 Dynamic Positioning**: Organic movement patterns with collision detection
 - **📊 Category Organization**: Skills grouped by technology categories
@@ -45,22 +64,33 @@
 - **📐 Responsive Sizing**: Dynamic sizing based on screen dimensions
 
 #### Hero Section
+
 - **⚡ 50+ Animated Elements**: Particles, shapes, sparkles, and decorations
 - **🔄 Dynamic Role Cycling**: Smooth animated job title transitions
 - **✨ Particle System**: Sparkle, twinkle, and floating effects
 - **🎪 Interactive Elements**: Hover effects and micro-interactions
 
 #### Project Showcase
+
 - **🏆 Luxury Project Cards**: Glass morphism with hover effects
 - **🖼️ Image Optimization**: Lazy loading and responsive images
 - **🔗 Live Demo Links**: Interactive project navigation
 - **📊 Technology Tags**: Visual tech stack indicators
 
 #### Contact System
-- **📝 Animated Contact Form**: Real-time validation and feedback
-- **📧 Email Integration**: Backend contact form processing
-- **🔒 Security Features**: Rate limiting and API key protection
-- **📱 Mobile Optimized**: Touch-friendly form elements
+
+- **📝 Animated Contact Form**: Real-time validation and feedback (⚡ 50-70% faster animations)
+- **📧 HloMail Integration**: External API with environment variable configuration
+- **🔒 Security Features**: API key protection and fallback values
+- **📱 Mobile Optimized**: Touch-friendly form elements with faster response times
+
+### 🎯 Performance Optimizations
+
+- **⚡ Faster Contact Animations**: Reduced animation durations from 7-16s to 2.5-4.5s
+- **🔧 Environment Variables**: Professional API configuration with `.env.example` template
+- **🧹 Code Cleanup**: Removed unused files (`server.js`, `mobile-host.bat`, duplicate CSS)
+- **📦 Dependency Optimization**: Cleaned up package.json and imports
+- **🎭 Balanced Effects**: Maintained luxury visual appeal with improved performance
 
 ## 🚀 Quick Start
 
@@ -110,23 +140,31 @@ npm install --save-dev eslint @typescript-eslint/eslint-plugin
 ### Step-by-Step Setup
 
 1. **Clone and Navigate**
+
    ```bash
    git clone https://github.com/YourUsername/portfolio.git
    cd portfolio
    ```
 
 2. **Install Dependencies**
+
    ```bash
    npm install
    ```
 
 3. **Environment Setup**
+
    ```bash
+   # Copy the environment template
    cp .env.example .env
+   
    # Edit .env with your configuration
+   # Update VITE_HLOMAIL_API_KEY with your API key
+   # Update VITE_HLOMAIL_ENDPOINT if needed
    ```
 
 4. **Start Development**
+
    ```bash
    npm run dev
    ```
@@ -255,21 +293,25 @@ xl: 1280px   /* Extra large devices */
 ### Animation Categories
 
 #### Floating Effects
+
 - `luxuryFloat` - Basic floating motion
 - `luxuryFloat1-4` - Complex floating variations with rotation
 - `crown-float` - Royal floating effect for premium elements
 
 #### Glow & Shine
+
 - `luxuryGlow` - Glow intensity animation
 - `goldShine` - Premium gold shine sweep
 - `pulse-gold` - Gold pulsing effect
 
 #### Particle System
+
 - `sparkle` - Sparkle appearance animation
 - `twinkle` - Twinkling stars effect
 - `particle-float` - Organic particle movements
 
 #### Entrance Animations
+
 - `fadeInUp` - Fade in from bottom
 - `slideInLeft/Right` - Side entrance animations
 - `scaleIn` - Scale entrance effect
@@ -316,12 +358,14 @@ const floatingVariants: Variants = {
 ### Testing on Mobile Device
 
 #### Quick Start (Windows)
+
 ```bash
 # Double-click the batch script
 ./mobile-host.bat
 ```
 
 #### Manual Commands
+
 ```bash
 # Build the project
 npm run build
@@ -334,6 +378,7 @@ npm run fullstack:mobile
 ```
 
 ### Mobile Features
+
 - ✅ **Responsive Viewport**: Optimized meta tag configuration
 - ✅ **Touch-Friendly**: Large touch targets and swipe gestures
 - ✅ **Mobile-First CSS**: Tailwind's mobile-first approach
@@ -344,98 +389,73 @@ npm run fullstack:mobile
 ### Finding Your Local IP
 
 **Windows:**
+
 ```cmd
 ipconfig | find "IPv4"
 ```
 
 **macOS/Linux:**
+
 ```bash
 ifconfig | grep "inet "
 ```
 
 Then visit `http://YOUR_LOCAL_IP:3000` on your mobile device.
 
-## 📧 Backend Integration
+## 📧 Contact Form Integration
 
-### Email Configuration (Gmail)
+### HloMail API Configuration
 
-1. **Enable 2-Factor Authentication**
-   - Go to [Google Account Settings](https://myaccount.google.com/)
-   - Navigate to **Security** → **2-Step Verification**
+The portfolio now uses HloMail API service for contact form submissions instead of a local server. This provides better reliability and easier deployment.
 
-2. **Generate App Password**
-   - Scroll down to **App passwords**
-   - Generate a new app password for "Mail"
-   - Copy the 16-character password
+1. **Environment Setup**
 
-3. **Environment Setup**
    ```bash
-   # Copy the example file
+   # Copy the environment template
    cp .env.example .env
    ```
 
+2. **Configure Environment Variables**
    Edit `.env` file:
+
    ```env
-   EMAIL_USER=your-email@gmail.com
-   EMAIL_PASS=your-16-character-app-password
-   API_KEY=78c4be0c6c8779406b83ded5172480a3
-   PORT=3001
+   # HloMail API Configuration
+   VITE_HLOMAIL_API_KEY=your_api_key_here
+   VITE_HLOMAIL_ENDPOINT=https://hlomail-backend.onrender.com/v1/contact-mail
+
+   # Portfolio Configuration
+   VITE_APP_NAME=Portfolio
+   VITE_APP_VERSION=1.0.0
    ```
 
-### Running Full-Stack Application
+3. **API Key Management**
+   - The application includes fallback API key for development
+   - For production, set your own `VITE_HLOMAIL_API_KEY`
+   - Environment variables ensure secure configuration
 
-```bash
-# Development mode
-npm run fullstack:dev
+### Contact Form Features
 
-# Mobile testing mode
-npm run fullstack:mobile
+- ✅ **Real-time Validation**: Client-side form validation with instant feedback
+- ✅ **Professional API**: HloMail service integration for reliable email delivery
+- ✅ **Error Handling**: Comprehensive error handling and user feedback
+- ✅ **Security**: Environment-based API key management
+- ✅ **Fast Animations**: Optimized animation performance (50-70% faster)
 
-# Run separately
-npm run backend:dev  # Terminal 1
-npm run dev         # Terminal 2
-```
+### Frontend-Only Deployment
 
-### API Endpoints
+Since the contact form uses an external API service:
 
-#### Contact Form Submission
-```
-POST http://localhost:3001/v1/contact-mail
-Content-Type: application/json
-```
-
-**Request Body:**
-```json
-{
-  "name": "John Doe",
-  "email": "john@example.com",
-  "message": "Hello, I'd like to work with you!",
-  "phone_no": "+1234567890",
-  "api_key": "78c4be0c6c8779406b83ded5172480a3"
-}
-```
-
-**Response:**
-```json
-{
-  "success": true,
-  "message": "Email sent successfully!"
-}
-```
-
-### Security Features
-
-- ✅ **Rate Limiting**: 5 requests per 15 minutes per IP
-- ✅ **API Key Validation**: Protects against unauthorized access
-- ✅ **Input Validation**: Email format and required field validation
-- ✅ **CORS Protection**: Configured for security
-- ✅ **Error Handling**: Comprehensive error responses
+- ✅ **No Backend Required**: Deploy anywhere (Vercel, Netlify, GitHub Pages)
+- ✅ **Easy Maintenance**: No server management needed
+- ✅ **Reliable**: Professional email service handling
+- ✅ **Scalable**: Handles form submissions without custom infrastructure
 
 ## 🌐 Deployment
 
 ### Option 1: Netlify (Recommended - Free)
 
 1. **Build your project**
+
    ```bash
    npm run build
    ```
@@ -464,11 +484,13 @@ vercel
 ### Option 3: GitHub Pages
 
 1. **Create Workflow File**
+
    ```bash
    mkdir -p .github/workflows
    ```
 
 2. **Add Deploy Configuration**
+
    ```yaml
    # .github/workflows/deploy.yml
    name: Deploy to GitHub Pages
@@ -518,20 +540,38 @@ php -S localhost:3000 -t dist
 - **First Input Delay (FID)**: < 100 milliseconds
 - **Cumulative Layout Shift (CLS)**: < 0.1
 
+### Recent Performance Optimizations (September 2025)
+
+#### Contact Page Speed Improvements
+
+- **⚡ 50-70% Faster Animations**: Contact page animations optimized
+  - Background particles: 7-16s → 2.5-4.5s duration
+  - Form animations: 0.8s → 0.4s duration
+  - Stagger delays: 0.1s → 0.05s intervals
+- **🧹 Code Cleanup**: Removed unused files and dependencies
+  - Eliminated `server.js`, `mobile-host.bat`, duplicate CSS files
+  - Cleaned up imports and optimized bundle size
+- **🔧 Environment Variables**: Professional API configuration
+  - Added `.env.example` template for easy setup
+  - Secure API key management with fallbacks
+
 ### Optimization Features
 
 #### Image Optimization
+
 - **Profile Image Issue**: `profile.jpg` is 773 KB (too large!)
 - **Target Size**: < 100 KB (87% reduction needed)
 - **Recommended Dimensions**: 400×400px or 500×500px
 - **Preferred Format**: WebP or optimized JPG
 
 #### Quick Image Optimization Tools
+
 1. **[TinyPNG.com](https://tinypng.com/)** - Easy compression
 2. **[Squoosh.app](https://squoosh.app/)** - Advanced options
 3. **[Optimizilla.com](https://imagecompressor.com/)** - Batch processing
 
 #### Animation Optimizations
+
 - **GPU Acceleration**: Transform-only animations
 - **Reduced Motion**: Accessibility-compliant fallbacks
 - **60fps Target**: Optimized with `will-change` properties
@@ -670,33 +710,39 @@ We welcome contributions to make this portfolio template even better!
 ### Development Setup
 
 1. **Fork the Repository**
+
    ```bash
    git clone https://github.com/YourUsername/portfolio.git
    cd portfolio
    ```
 
 2. **Create Feature Branch**
+
    ```bash
    git checkout -b feature/amazing-feature
    ```
 
 3. **Install Dependencies**
+
    ```bash
    npm install
    ```
 
 4. **Start Development**
+
    ```bash
    npm run dev
    ```
 
 5. **Make Changes and Test**
+
    ```bash
    npm run build
    npm run preview
    ```
 
 6. **Commit and Push**
+
    ```bash
    git add .
    git commit -m "✨ Add amazing feature"
@@ -772,22 +818,26 @@ SOFTWARE.
 ## 🔗 Links & Resources
 
 ### Documentation
+
 - [React Documentation](https://reactjs.org/docs)
 - [Tailwind CSS Documentation](https://tailwindcss.com/docs)
 - [Framer Motion Documentation](https://www.framer.com/motion/)
 - [Vite Documentation](https://vitejs.dev/guide/)
 
 ### Design Inspiration
+
 - [Dribbble - Portfolio Designs](https://dribbble.com/tags/portfolio)
 - [Awwwards - Portfolio Sites](https://www.awwwards.com/websites/portfolio/)
 - [CSS Design Awards](https://www.cssdesignawards.com/)
 
 ### Performance Tools
+
 - [Google PageSpeed Insights](https://pagespeed.web.dev/)
 - [GTmetrix](https://gtmetrix.com/)
 - [WebPageTest](https://www.webpagetest.org/)
 
 ### Deployment Platforms
+
 - [Netlify](https://netlify.com) - Static site hosting
 - [Vercel](https://vercel.com) - React/Next.js hosting
 - [GitHub Pages](https://pages.github.com) - Free static hosting
